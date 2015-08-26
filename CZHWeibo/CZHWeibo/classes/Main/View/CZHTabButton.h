@@ -10,6 +10,6 @@
 
 @interface CZHTabButton : UIButton
 
-
+@property (nonatomic,strong)UITabBarItem *item;
 
 @end

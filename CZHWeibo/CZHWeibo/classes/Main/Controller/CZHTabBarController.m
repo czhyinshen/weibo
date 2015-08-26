@@ -23,7 +23,9 @@
     
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
     
     for (UIView *child in self.tabBar.subviews) {
@@ -48,7 +50,9 @@
 - (void)setUpAllChirView{
     
     CZHHomeViewController*homeVc = [[CZHHomeViewController alloc]init];
+    homeVc.tabBarItem.badgeValue = @"10";
     [self setUpChirViewWithVC:homeVc title:@"首页" image:@"tabbar_home" selectImage:@"tabbar_home_selected"];
+    
     
     CZHMessageViewController*msgVc = [[CZHMessageViewController alloc]init];
     [self setUpChirViewWithVC:msgVc title:@"信息" image:@"tabbar_message_center" selectImage:@"tabbar_message_center_selected"];

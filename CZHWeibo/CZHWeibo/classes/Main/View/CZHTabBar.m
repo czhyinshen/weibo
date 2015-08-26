@@ -40,6 +40,8 @@
     CZHTabButton*button = [[CZHTabButton alloc]init];
     [self addSubview:button];
     
+    button.item = item;
+    
     [button setTitle:item.title forState:UIControlStateNormal];
     [button setImage:item.image forState:UIControlStateNormal];
     [button setImage:item.selectedImage forState:UIControlStateSelected];
@@ -52,13 +54,15 @@
 }
 
 - (void)buttonClicked:(CZHTabButton*)btn{
+    
     self.selectedButton.selected = NO;
     btn.selected = YES;
     self.selectedButton = btn;
+
 }
 
-
 -(void)layoutSubviews{
+    
     [super layoutSubviews];
     CGFloat buttonW = self.frame.size.width /self.subviews.count;
     CGFloat buttonH = self.frame.size.height;

@@ -7,9 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CZHTabBar;
+
+@protocol CZHTabBarDelegate <NSObject>
+@optional
+
+- (void)TabBar:(CZHTabBar*)tabBar diselectButtonItemFrom:(int)item to:(int)newItem;
+
+@end
 
 @interface CZHTabBar : UIView
 
+@property (nonatomic,weak)id<CZHTabBarDelegate> delegate;
+
 - (void)addTabBarButtonWithItem:(UITabBarItem*)item;
+
+
 
 @end
