@@ -9,6 +9,7 @@
 #import "CZHTabBar.h"
 #import "UIImage+CZHCustomImg.h"
 #import "CZHTabButton.h"
+
 @interface CZHTabBar()
 
 @property (nonatomic,strong)CZHTabButton *selectedButton;
@@ -54,7 +55,9 @@
 }
 
 - (void)buttonClicked:(CZHTabButton*)btn{
-    
+    if ([self.delegate respondsToSelector:@selector(TabBar:diselectButtonItemFrom:to:)]) {
+        [self.delegate TabBar:self diselectButtonItemFrom:self.selectedButton.tag to:btn.tag];
+    }
     self.selectedButton.selected = NO;
     btn.selected = YES;
     self.selectedButton = btn;
@@ -77,5 +80,6 @@
         
     }
 }
+
 
 @end

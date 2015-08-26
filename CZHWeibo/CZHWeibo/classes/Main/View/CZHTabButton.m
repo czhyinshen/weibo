@@ -8,10 +8,12 @@
 
 #import "CZHTabButton.h"
 #import "UIImage+CZHCustomImg.h"
+#import "CZHTabBar.h"
 
 #define CZHTabButtonImageRatio 0.6
 #define CZHTabButtonImageColor [UIColor colorWithRed:117.0/255.0 green:117.0/255.0 blue:117.0/255.0 alpha:1]
 #define CZHTabButtonImageSelectedColor [UIColor colorWithRed:236.0/255.0 green:103.0/255.0 blue:0 alpha:1]
+
 @interface CZHTabButton()
 
 @property (nonatomic,strong)UIButton *badgeButton;
@@ -96,6 +98,8 @@
     return  CGRectMake(0, titleY, titleW, titleH);
 
 }
+
+
 
 
 

@@ -8,7 +8,8 @@
 
 #import "CZHTabBarController.h"
 #import "UIImage+CZHCustomImg.h"
-@interface CZHTabBarController ()
+@interface CZHTabBarController ()<CZHTabBarDelegate>
+
 @property (nonatomic,weak)CZHTabBar *customTabBar;
 @end
 
@@ -20,7 +21,6 @@
     [self setUpTabBar];
     // Do any additional setup after loading the view.
     [self setUpAllChirView];
-    
     
 }
 
@@ -45,6 +45,8 @@
     [self.tabBar addSubview:customTabBar];
     
     self.customTabBar = customTabBar;
+    
+    self.customTabBar.delegate = self;
 }
 
 - (void)setUpAllChirView{
@@ -86,6 +88,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)TabBar:(CZHTabBar *)tabBar diselectButtonItemFrom:(NSInteger)itemIndex to:(NSInteger)newItemIndex{
+    self.selectedIndex = newItemIndex;
+}
 /*
 #pragma mark - Navigation
 

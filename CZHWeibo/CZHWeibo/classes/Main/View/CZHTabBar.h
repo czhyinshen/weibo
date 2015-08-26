@@ -12,7 +12,7 @@
 @protocol CZHTabBarDelegate <NSObject>
 @optional
 
-- (void)TabBar:(CZHTabBar*)tabBar diselectButtonItemFrom:(int)item to:(int)newItem;
+- (void)TabBar:(CZHTabBar*)tabBar diselectButtonItemFrom:(NSInteger)itemIndex to:(NSInteger)newItemIndex;
 
 @end
 
