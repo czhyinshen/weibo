@@ -52,7 +52,7 @@
 - (void)setUpAllChirView{
     
     CZHHomeViewController*homeVc = [[CZHHomeViewController alloc]init];
-    homeVc.tabBarItem.badgeValue = @"10";
+    homeVc.tabBarItem.badgeValue = @"10999";
     [self setUpChirViewWithVC:homeVc title:@"首页" image:@"tabbar_home" selectImage:@"tabbar_home_selected"];
     
     
@@ -81,11 +81,6 @@
     
     [self.customTabBar addTabBarButtonWithItem:chirVC.tabBarItem];
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)TabBar:(CZHTabBar *)tabBar diselectButtonItemFrom:(NSInteger)itemIndex to:(NSInteger)newItemIndex{

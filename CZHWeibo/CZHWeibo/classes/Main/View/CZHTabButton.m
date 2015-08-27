@@ -59,30 +59,33 @@
     [self bandgeWithBadgeValue:item.badgeValue];
 }
 
-- (void)bandgeWithBadgeValue:(NSString*)badgeValue{
 
-    [self.badgeButton setTitle:badgeValue forState:UIControlStateNormal];
-    [self.badgeButton setBackgroundImage:[UIImage imageWithName:@"main_badge"] forState:UIControlStateNormal];
-    
-    self.badgeButton.userInteractionEnabled = NO;
-    [self.badgeButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
-    
-    CGFloat badgeW = self.badgeButton.currentBackgroundImage.size.width;
-    CGFloat badgeH = self.badgeButton.currentBackgroundImage.size.height;
-    CGFloat badgeX = self.frame.size.width - self.badgeButton.frame.size.width-30;
-    CGFloat badgeY = 0;
-    
-    if (badgeValue.length >1) {
-        CGSize badgeSize = [badgeValue sizeWithAttributes:@{NSFontAttributeName:self.badgeButton.titleLabel.font}];
-        badgeH = badgeSize.height+10;
-        badgeW = badgeSize.width+10;
+- (void)bandgeWithBadgeValue:(NSString*)badgeValue{
+    if (badgeValue) {
+        [self.badgeButton setTitle:badgeValue forState:UIControlStateNormal];
+        [self.badgeButton setBackgroundImage:[UIImage imageWithName:@"main_badge"] forState:UIControlStateNormal];
+        
+        self.badgeButton.userInteractionEnabled = NO;
+        [self.badgeButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
+        CGRect frame = self.badgeButton.frame;
+        CGFloat badgeW = self.badgeButton.currentBackgroundImage.size.width;
+        CGFloat badgeH = self.badgeButton.currentBackgroundImage.size.height;
+        CGFloat badgeX = self.frame.size.width - self.badgeButton.frame.size.width-30;
+        CGFloat badgeY = 0;
+        
+        if (badgeValue.length >1) {
+            CGSize badgeSize = [badgeValue sizeWithAttributes:@{NSFontAttributeName:self.badgeButton.titleLabel.font}];
+            badgeW = badgeSize.width+10;
+            
+        }
+        frame.size = CGSizeMake(badgeW, badgeH);
+        frame.origin = CGPointMake(badgeX, badgeY);
+        
+        self.badgeButton.frame = frame;
+    }else{
+        self.badgeButton.hidden = YES;
     }
     
-    
-    CGRect frame = CGRectMake(badgeX, badgeY, badgeW, badgeH);
-    
-    [self.badgeButton setFrame:frame];
-
 }
 
 - (void)setHighlighted:(BOOL)highlighted{
