@@ -14,4 +14,6 @@
 
 + (UIImage *)imageWithName:(NSString*)name;
 
++ (UIImage*)resizingImageWithName:(NSString*)name;
+
 @end
