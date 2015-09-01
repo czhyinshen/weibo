@@ -9,6 +9,7 @@
 #import "CZHTabButton.h"
 #import "UIImage+CZHCustomImg.h"
 #import "CZHTabBar.h"
+#import "CZHBadgeButton.h"
 
 #define CZHTabButtonImageRatio 0.6
 #define CZHTabButtonImageColor [UIColor colorWithRed:117.0/255.0 green:117.0/255.0 blue:117.0/255.0 alpha:1]
@@ -16,7 +17,7 @@
 
 @interface CZHTabButton()
 
-@property (nonatomic,strong)UIButton *badgeButton;
+@property (nonatomic,strong)CZHBadgeButton *badgeButton;
 
 @end
 
@@ -26,22 +27,27 @@
     [UIColor colorWithRed:117 green:117 blue:117 alpha:1];
     
     self = [super initWithFrame:frame];
+    if (self) {
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        
+        self.imageView.contentMode = UIViewContentModeCenter;
+        
+        self.titleLabel.font = [UIFont systemFontOfSize:11];
+        
+        [self setTitleColor:CZHTabButtonImageColor forState:UIControlStateNormal];
+        [self setTitleColor:CZHTabButtonImageSelectedColor forState:UIControlStateSelected];
+        
+        CZHBadgeButton*badgebutton = [[CZHBadgeButton alloc]init];
+        
+        self.badgeButton = badgebutton;
+        
+        self.badgeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleBottomMargin;
+        
+        [self addSubview:badgebutton];
+       
+    }
     
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.imageView.contentMode = UIViewContentModeCenter;
-    self.titleLabel.font = [UIFont systemFontOfSize:11];
-    self.badgeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleBottomMargin;
-
-    [self setTitleColor:CZHTabButtonImageColor forState:UIControlStateNormal];
-    [self setTitleColor:CZHTabButtonImageSelectedColor forState:UIControlStateSelected];
-    
-    UIButton*badgebutton = [[UIButton alloc]init];
-    self.badgeButton = badgebutton;
-    
-    self.badgeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleBottomMargin;
-    
-    [self addSubview:self.badgeButton];
-    return self;
+     return self;
 
 }
 
@@ -56,36 +62,13 @@
 
 -(void)setItem:(UITabBarItem *)item{
     _item = item;
-    [self bandgeWithBadgeValue:item.badgeValue];
-}
-
-
-- (void)bandgeWithBadgeValue:(NSString*)badgeValue{
-    if (badgeValue) {
-        [self.badgeButton setTitle:badgeValue forState:UIControlStateNormal];
-        [self.badgeButton setBackgroundImage:[UIImage imageWithName:@"main_badge"] forState:UIControlStateNormal];
-        
-        self.badgeButton.userInteractionEnabled = NO;
-        [self.badgeButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
-        CGRect frame = self.badgeButton.frame;
-        CGFloat badgeW = self.badgeButton.currentBackgroundImage.size.width;
-        CGFloat badgeH = self.badgeButton.currentBackgroundImage.size.height;
-        CGFloat badgeX = self.frame.size.width - self.badgeButton.frame.size.width-30;
-        CGFloat badgeY = 0;
-        
-        if (badgeValue.length >1) {
-            CGSize badgeSize = [badgeValue sizeWithAttributes:@{NSFontAttributeName:self.badgeButton.titleLabel.font}];
-            badgeW = badgeSize.width+10;
-            
-        }
-        frame.size = CGSizeMake(badgeW, badgeH);
-        frame.origin = CGPointMake(badgeX, badgeY);
-        
-        self.badgeButton.frame = frame;
-    }else{
-        self.badgeButton.hidden = YES;
-    }
     
+    [item addObserver:self forKeyPath:@"image" options:0 context:nil];
+    [item addObserver:self forKeyPath:@"badgeValue" options:0 context:nil];
+    [item addObserver:self forKeyPath:@"selectedImage" options:0 context:nil];
+    [item addObserver:self forKeyPath:@"title" options:0 context:nil];
+
+    [self observeValueForKeyPath:nil ofObject:nil change:nil context:nil];
 }
 
 - (void)setHighlighted:(BOOL)highlighted{
@@ -102,6 +85,27 @@
 
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void *)context{
+    
+    [self setTitle:self.item.title forState:UIControlStateNormal];
+    [self setTitle:self.item.title forState:UIControlStateSelected];
+    
+    [self setImage:self.item.image forState:UIControlStateNormal];
+    [self setImage:self.item.selectedImage forState:UIControlStateSelected];
+    
+    self.badgeButton.badgeValue = self.item.badgeValue;
+    
+    CGRect frame = self.badgeButton.frame;
+    
+    CGFloat badgeX = self.frame.size.width - self.badgeButton.frame.size.width +5;
+    
+    CGFloat badgeY = 0;
+    
+    frame.origin = CGPointMake(badgeX, badgeY);
+    
+    self.badgeButton.frame = frame;
+
+}
 
 
 

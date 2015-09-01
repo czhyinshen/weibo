@@ -8,6 +8,7 @@
 
 #import "CZHTabBarController.h"
 #import "UIImage+CZHCustomImg.h"
+#import "CZHNavigationController.h"
 @interface CZHTabBarController ()<CZHTabBarDelegate>
 
 @property (nonatomic,weak)CZHTabBar *customTabBar;
@@ -75,7 +76,7 @@
     
     chirVC.tabBarItem.selectedImage = [[UIImage imageWithName:selectImage]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
    
-    UINavigationController*navi = [[UINavigationController alloc]initWithRootViewController:chirVC];
+    CZHNavigationController*navi = [[CZHNavigationController alloc]initWithRootViewController:chirVC];
     
     [self addChildViewController:navi];
     

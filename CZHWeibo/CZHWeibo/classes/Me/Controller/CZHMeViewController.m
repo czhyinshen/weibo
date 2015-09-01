@@ -8,7 +8,7 @@
 
 #import "CZHMeViewController.h"
 
-@interface CZHMeViewController ()
+@interface CZHMeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
 
@@ -22,6 +22,25 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 20;
+}
+
+static NSString*cellIdentifier = @"Cell";
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell*cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.textLabel.text = @"hehe";
+    return cell;
 }
 
 /*
