@@ -17,7 +17,6 @@
 + (void)initialize{
 
     UINavigationBar*naviBar =[UINavigationBar appearance];
-    [naviBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_background"] forBarMetrics:UIBarMetricsDefault];
     NSDictionary*naviDic = @{NSForegroundColorAttributeName:[UIColor blackColor]};
     
     [naviBar setTitleTextAttributes:naviDic];

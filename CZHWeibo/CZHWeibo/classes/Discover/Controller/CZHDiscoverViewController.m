@@ -7,8 +7,10 @@
 //
 
 #import "CZHDiscoverViewController.h"
+#import "UIButton+CZH.h"
+#import "CZHSearchBar.h"
 
-@interface CZHDiscoverViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface CZHDiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @end
 
@@ -17,6 +19,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    CZHSearchBar*searchBar = [CZHSearchBar searchBar];
+    
+    searchBar.delegate = self;
+    
+    searchBar.frame = CGRectMake(0, 0, 300, 30);
+    
+    self.navigationItem.titleView = searchBar;
+    
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,5 +54,28 @@ static NSString*cellIdentifier = @"Cell";
     cell.textLabel.text = @"hehe";
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [self.navigationItem.titleView resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    textField.leftView.frame = CGRectMake(0, 0, 30, textField.frame.size.height);
+    
+    textField.leftView.contentMode = UIViewContentModeCenter;
+    
+    
+    return YES;
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    textField.leftView.contentMode = UIViewContentModeRight;
+    textField.leftView.frame = CGRectMake(0, 0, 150, textField.frame.size.height);
+    
+}
+
 
 @end

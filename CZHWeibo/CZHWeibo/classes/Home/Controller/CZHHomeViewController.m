@@ -17,6 +17,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton ButtonWithTitle:nil image:@"tabbar_profile_os7" highlightedImage:@"tabbar_profile_selected_os7" target:self action:@selector(personal)]];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton ButtonWithTitle:nil image:@"navigationbar_pop_os7" highlightedImage:@"navigationbar_pop_highlighted_os7" target:self action:@selector(scan)]];
+    
+}
+
+- (void)personal{
+
+}
+
+- (void)scan{
+
 }
 
 - (void)didReceiveMemoryWarning {

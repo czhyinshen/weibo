@@ -7,8 +7,10 @@
 //
 
 #import "CZHMessageViewController.h"
+#import "UIImage+CZHCustomImg.h"
+#import "CZHSearchBar.h"
 
-@interface CZHMessageViewController ()
+@interface CZHMessageViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -17,6 +19,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIButton*btn = [UIButton ButtonWithTitle:@"写私信" image:nil highlightedImage:nil target:self action:@selector( writePersonalMsg)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
+}
+
+- (void)writePersonalMsg{
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,5 +51,8 @@ static NSString*cellIdentifier = @"Cell";
     cell.textLabel.text = @"hehe";
     return cell;
 }
+
+
+
 
 @end

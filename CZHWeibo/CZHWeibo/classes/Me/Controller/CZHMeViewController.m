@@ -17,6 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton ButtonWithTitle:@"设置" image:nil highlightedImage:nil target:self action:@selector(setting)]];
+    
+}
+
+- (void)setting{
+
 }
 
 - (void)didReceiveMemoryWarning {
