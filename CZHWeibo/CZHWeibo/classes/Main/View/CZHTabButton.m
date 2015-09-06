@@ -79,6 +79,7 @@
     CGFloat titleH = contentRect.size.height * (1-CZHTabButtonImageRatio);
     
     CGFloat titleY = contentRect.size.height * CZHTabButtonImageRatio;
+
     return  CGRectMake(0, titleY, titleW, titleH);
 
 }

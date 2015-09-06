@@ -15,10 +15,11 @@
     
     UIButton*btn = [[UIButton alloc]init];
     
-    if(image && hi){
+    if(image){
         
         [btn setImage:[UIImage imageWithName:image] forState:UIControlStateNormal];
-    
+    }
+    if (hi) {
         [btn setImage:[UIImage imageWithName:hi] forState:UIControlStateHighlighted];
     }
     if (title) {

@@ -7,6 +7,9 @@
 //
 
 #import "CZHHomeViewController.h"
+#import "CZHTitleBtn.h"
+#define titleBtnImageDownTag 0
+#define titleBtnUpImageTag 1
 
 @interface CZHHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -17,10 +20,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton ButtonWithTitle:nil image:@"tabbar_profile_os7" highlightedImage:@"tabbar_profile_selected_os7" target:self action:@selector(personal)]];
+    UIButton* lefBtn = [UIButton ButtonWithTitle:nil image:@"navigationbar_friendsearch" highlightedImage:@"navigationbar_friendsearch_highlighted" target:self action:@selector(personal)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:lefBtn];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton ButtonWithTitle:nil image:@"navigationbar_pop_os7" highlightedImage:@"navigationbar_pop_highlighted_os7" target:self action:@selector(scan)]];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton ButtonWithTitle:nil image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted" target:self action:@selector(scan)]];
+
+    CZHTitleBtn *titleBtn = [CZHTitleBtn titleBtn];
     
+    titleBtn.frame = CGRectMake(0, 0, 100, 30);
+    
+    [titleBtn setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
+    [titleBtn setTitle:@"dsdfas" forState:UIControlStateNormal];
+    
+   
+    titleBtn.tag = titleBtnImageDownTag;
+    [titleBtn setBackgroundImage:[UIImage resizingImageWithName:@"navigationbar_filter_background_highlighted"] forState:UIControlStateHighlighted];
+
+    self.navigationItem.titleView = titleBtn;
+    
+}
+
+- (void)clickTitleBtn:(UIButton *)titleBtn{
+    if (titleBtn.tag == titleBtnImageDownTag) {
+        [titleBtn setImage:[UIImage imageWithName:@"navigationbar_arrow_up"] forState:UIControlStateNormal];
+        titleBtn.tag = titleBtnUpImageTag;
+    }else{
+        [titleBtn setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
+        titleBtn.tag = titleBtnImageDownTag;
+    }
+
 }
 
 - (void)personal{

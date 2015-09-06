@@ -74,7 +74,7 @@
     
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchDown];
     
-    if (self.subviews.count == 1) {
+    if (self.subviews.count == 2) {
         [self buttonClicked:button];
     }
 }
