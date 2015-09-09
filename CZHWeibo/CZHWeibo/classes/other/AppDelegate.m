@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CZHTabBarController.h"
+#import "CZHSurfaceViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,12 +18,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch
     
-    
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+    NSString* lastVersionCode = [ud stringForKey:@"lastVersionCode"];
+    NSString* currentVersionCode = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    self.window.rootViewController = [[CZHTabBarController alloc]init];
+    
+    if (![currentVersionCode isEqualToString:lastVersionCode]) {
+        self.window.rootViewController = [[CZHSurfaceViewController alloc]init];
+        [ud setValue:currentVersionCode forKey:@"lastVersionCode"];
+    }else{
+        self.window.rootViewController = [[CZHTabBarController alloc]init];
+        
+    }
     [self.window makeKeyAndVisible];
     application.statusBarHidden = NO;
-    
+
     return YES;
 }
 

@@ -9,6 +9,7 @@
 #import "CZHTabBarController.h"
 #import "UIImage+CZHCustomImg.h"
 #import "CZHNavigationController.h"
+#import "CZHSurfaceViewController.h"
 @interface CZHTabBarController ()<CZHTabBarDelegate>
 
 @property (nonatomic,weak)CZHTabBar *customTabBar;
