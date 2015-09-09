@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 #import "CZHTabBarController.h"
 #import "CZHSurfaceViewController.h"
+#import "CZHOAuthViewController.h"
+#import "CZHAccount.h"
+#import "CZHWeiboTool.h"
+#import "CZHAccountTool.h"
 @interface AppDelegate ()
 
 @end
@@ -17,23 +21,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch
-    
-    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-    NSString* lastVersionCode = [ud stringForKey:@"lastVersionCode"];
-    NSString* currentVersionCode = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
-
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    
-    if (![currentVersionCode isEqualToString:lastVersionCode]) {
-        self.window.rootViewController = [[CZHSurfaceViewController alloc]init];
-        [ud setValue:currentVersionCode forKey:@"lastVersionCode"];
-    }else{
-        self.window.rootViewController = [[CZHTabBarController alloc]init];
-        
-    }
     [self.window makeKeyAndVisible];
+    
+    CZHAccount*account = [CZHAccountTool account];
+    
+    if (!account) {
+        
+       self.window.rootViewController = [[CZHOAuthViewController alloc]init];
+    }else{
+        [CZHWeiboTool ChooseRootController];
+    
+    }
+    
+    
     application.statusBarHidden = NO;
-
+    
     return YES;
 }
 

@@ -33,8 +33,10 @@
         
         [self setImage:[UIImage imageNamed:@"new_feature_share_true"] forState:UIControlStateSelected];
         
-        [self addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchDown];
+        self.selected = YES;
         
+        [self addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchDown];
+
     }
     return self;
 }
