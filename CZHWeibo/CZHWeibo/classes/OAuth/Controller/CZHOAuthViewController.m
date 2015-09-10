@@ -8,9 +8,7 @@
 
 #import "CZHOAuthViewController.h"
 #import "AFNetworking.h"
-#import "AFHTTPRequestOperationManager.h"
 #import "CZHAccount.h"
-#import "CZHSurfaceViewController.h"
 #import "CZHTabBarController.h"
 #import "CZHWeiboTool.h"
 #import "CZHAccountTool.h"
