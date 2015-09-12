@@ -1,48 +1,24 @@
 //
-//  CZHStatuses.h
+//  CZHStatusesTableViewCell.h
 //  CZHWeibo
 //
-//  Created by 陈志辉 on 15/9/10.
+//  Created by 陈志辉 on 15/9/11.
 //  Copyright (c) 2015年 tarena. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "CZHUser.h"
-@interface CZHStatuses : NSObject
+#import <UIKit/UIKit.h>
+#import "CZHStatuses.h"
+#import "CZHStatusFrame.h"
+@interface CZHStatusesTableViewCell : UITableViewCell
 
-/**
- *  微博创建时间
- */
-@property (nonatomic,strong)NSString *created_at;
-/**
- *  微博的内容(文字)
- */
-@property (nonatomic,strong)NSString *text;
-/**
- *  微博来源(文字)
- */
-@property (nonatomic,strong)NSString *source;
-/**
- *   comments_count(文字)
- */
-@property (nonatomic,strong)NSString *comments_count;
-/**
- *   reposts_count(文字)
- */
-@property (nonatomic,strong)NSString *reposts_count;
-/**
- *  缩略图片地址
- */
-@property (nonatomic,strong)NSString * thumbnail_pic;
-/**
- *  微博的内容(文字)
- */
-@property (nonatomic,strong)CZHUser *user;
++ (CZHStatusesTableViewCell*)cellWithTableView:(UITableView*)tableView;
 
-@property (nonatomic,strong)CZHStatuses *retweeted_status;
-
+@property (nonatomic,strong)CZHStatusFrame *statusFrame;
 @end
 /*
+ 
+ 
+ 返回值字段	字段类型	字段说明
  created_at	string	微博创建时间
  id	int64	微博ID
  mid	int64	微博MID

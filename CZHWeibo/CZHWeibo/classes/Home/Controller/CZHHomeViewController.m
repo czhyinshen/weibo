@@ -16,23 +16,24 @@
 #import "MJExtension.h"
 #import "CZHUser.h"
 #import "CZHStatuses.h"
-
+#import "CZHStatusFrame.h"
+#import "CZHStatusesTableViewCell.h"
 
 #define titleBtnImageDownTag 0
 #define titleBtnUpImageTag 1
 
 @interface CZHHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic,strong)NSArray  *statuses;
+@property (nonatomic,strong)NSArray  *statusesFrame;
 
 @end
 
 @implementation CZHHomeViewController
 
 -(NSArray *)statuses{
-    if (!_statuses) {
-        _statuses = [NSArray array];
+    if (!_statusesFrame) {
+        _statusesFrame = [NSArray array];
     }
-    return _statuses;
+    return _statusesFrame;
 }
 
 - (void)viewDidLoad {
@@ -93,7 +94,17 @@
     
     [mgr GET:@"https://api.weibo.com/2/statuses/public_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        self.statuses = [CZHStatuses objectArrayWithKeyValuesArray:responseObject[@"statuses"] ];
+        NSArray *statusArray = [CZHStatuses objectArrayWithKeyValuesArray:responseObject[@"statuses"] ];
+        NSMutableArray *statusFrames = [NSMutableArray array];
+        
+        for (CZHStatuses *status in statusArray) {
+            
+            CZHStatusFrame*statusesFrame = [[CZHStatusFrame alloc]init];
+            statusesFrame.statues = status;
+            
+            [statusFrames addObject:statusesFrame];
+        }
+        self.statusesFrame = statusFrames;
         
         [self.tableView reloadData];
     
@@ -115,21 +126,21 @@
 
 static NSString*cellIdentifier = @"Cell";
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell*cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    }
-    CZHStatuses *statuses = self.statuses[indexPath.row];
-    NSString *weiboImage = statuses.thumbnail_pic;
-    CZHUser*user = statuses.user;
+    CZHStatusesTableViewCell*cell = [CZHStatusesTableViewCell cellWithTableView:tableView];
     
-    [cell.imageView setImageWithURL:[NSURL URLWithString:weiboImage] placeholderImage:[UIImage imageNamed:@"news"]];
-    cell.textLabel.text = statuses.text;
-    cell.detailTextLabel.text = user.name;
+    cell.statusFrame = self.statusesFrame[indexPath.row];
+    
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CZHStatusFrame*statusFrame = self.statusesFrame[indexPath.row];
+    
+    return statusFrame.cellHeight;
+    
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }

@@ -13,8 +13,15 @@
 @property (nonatomic,strong)NSString *name;
 @property (nonatomic,strong)NSString *idstr;
 @property (nonatomic,strong)NSString *profile_image_url;
+@property (nonatomic,strong)NSString * avatar_large;
+/**
+ *  是否是Vip
+ */
+
+@property (nonatomic,getter=isVIP) BOOL*vip;
 
 @end
+
 /*
  
  返回值字段	字段类型	字段说明
