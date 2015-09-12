@@ -8,10 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-#define CZHNameLabelFontSize [UIFont systemFontOfSize:13]
-#define CZHTimeLabelFontSize [UIFont systemFontOfSize:10]
+/*微博昵称字体*/
+#define CZHNameLabelFontSize [UIFont systemFontOfSize:15]
+/*微博时间字体*/
+#define CZHTimeLabelFontSize [UIFont systemFontOfSize:12]
+/*微博来源字体*/
 #define CZHSourceFontSize CZHTimeLabelFontSize
-#define CZHContentFontSize [UIFont systemFontOfSize:15]
+/*微博内容字体*/
+#define CZHContentFontSize [UIFont systemFontOfSize:14]
+
+/*被转发微博昵称字体*/
+#define CZHretweetNameFontSize [UIFont systemFontOfSize:14]
+/*被转发微博内容字体*/
+#define CZHRetweetContentFontSize [UIFont systemFontOfSize:14]
+
+#define CZHStatuCellBolder 10
+
+#define  CZHTableViewCellBolder 10
+
+#define  CZHStatusToolBarH 30
 
 @class CZHStatuses;
 

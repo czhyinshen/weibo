@@ -22,24 +22,31 @@
  *  微博来源(文字)
  */
 @property (nonatomic,strong)NSString *source;
-/**
- *   comments_count(文字)
- */
-@property (nonatomic,strong)NSString *comments_count;
-/**
- *   reposts_count(文字)
- */
-@property (nonatomic,strong)NSString *reposts_count;
+
 /**
  *  缩略图片地址
  */
-@property (nonatomic,strong)NSString * thumbnail_pic;
+@property (nonatomic,strong)NSString * bmiddle_pic;
 /**
  *  微博的内容(文字)
  */
 @property (nonatomic,strong)CZHUser *user;
 
-@property (nonatomic,strong)CZHStatuses *retweeted_status;
+@property (nonatomic,strong)CZHStatuses * retweeted_status;
+
+/**
+ *  微博的转发数
+ */
+@property (nonatomic, assign) int reposts_count;
+/**
+ *  微博的评论数
+ */
+@property (nonatomic, assign) int comments_count;
+/**
+ *  微博的表态数(被赞数)
+ */
+@property (nonatomic, assign) int attitudes_count;
+
 
 @end
 /*

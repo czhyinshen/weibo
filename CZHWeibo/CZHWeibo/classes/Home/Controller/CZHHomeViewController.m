@@ -39,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
     [self setUPBarbuttonItem];
 
     [self setUpTitleView];
@@ -54,6 +55,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:lefBtn];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton ButtonWithTitle:nil image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted" target:self action:nil]];
+    
+    self.tableView.backgroundColor =  [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
 }
 
 - (void)setUpTitleView{
@@ -92,7 +97,7 @@
     NSMutableDictionary*param = [NSMutableDictionary dictionary];
     param[@"access_token"] = [CZHAccountTool account].access_token;
     
-    [mgr GET:@"https://api.weibo.com/2/statuses/public_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSArray *statusArray = [CZHStatuses objectArrayWithKeyValuesArray:responseObject[@"statuses"] ];
         NSMutableArray *statusFrames = [NSMutableArray array];
@@ -105,11 +110,11 @@
             [statusFrames addObject:statusesFrame];
         }
         self.statusesFrame = statusFrames;
-        
+
         [self.tableView reloadData];
-    
+ 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    
+
         NSLog(@"%@",error);
    
     }];

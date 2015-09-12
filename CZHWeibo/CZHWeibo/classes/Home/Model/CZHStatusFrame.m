@@ -9,10 +9,7 @@
 #import "CZHStatusFrame.h"
 #import "CZHStatuses.h"
 #import "CZHUser.h"
-
-
-
-#define CZHStatuCellBolder 5
+#import "UIImageView+WebCache.h"
 
 @implementation CZHStatusFrame
 
@@ -25,7 +22,7 @@
     CGFloat topViewW = cellW;
     CGFloat topViewX = 0;
     CGFloat topViewY = 0;
-
+    CGFloat topViewH = 0;
     
     //2.头像视图
     CGFloat iconViewWH = 35;
@@ -49,7 +46,7 @@
     //5.微博时间
      CGSize TimeLabelSize = [self.statues.created_at sizeWithAttributes:@{NSFontAttributeName: CZHTimeLabelFontSize}];
     CGFloat TimeLabelX = nameLabelX;
-    CGFloat TimeLabelY = CGRectGetMaxY(_nameLabelF) + CZHStatuCellBolder;
+    CGFloat TimeLabelY = CGRectGetMaxY(_nameLabelF) + CZHStatuCellBolder/2;
     _TimeLabelF= (CGRect){{TimeLabelX,TimeLabelY},TimeLabelSize};
 
     //6.来源
@@ -59,30 +56,88 @@
     CGFloat sourceLabelW = topViewW - CGRectGetMaxX(_TimeLabelF)-2*CZHStatuCellBolder;
     _sourceLabelF = (CGRect){{sourceLabelX,sourceLabelY},{sourceLabelW,sourceLabelSize.height}};
 
-    //8.微博正文内容
-    CGFloat maxHeadMargin = MAX(CGRectGetMaxY(_TimeLabelF),CGRectGetMaxY(_iconViewF))+CZHStatuCellBolder;
+    //7.微博正文内容
+    CGFloat maxHeadMargin = MAX(CGRectGetMaxY(_TimeLabelF),CGRectGetMaxY(_iconViewF));
     CGFloat contentLabelMaxW = topViewW- 2*CZHStatuCellBolder;
     CGFloat contentLabelY = maxHeadMargin+CZHStatuCellBolder;
     CGFloat contentLabelX = CZHStatuCellBolder;
     CGSize  contentLabelSize = [self.statues.text boundingRectWithSize:CGSizeMake(contentLabelMaxW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:CZHContentFontSize} context:nil].size;
     _contentLabelF = (CGRect){{contentLabelX,contentLabelY},contentLabelSize};
     
-    //7.配图视图
+    //8.配图视图
     
-    CGSize photoLabelSize = {50,50};
-    CGFloat photoViewX = CZHStatuCellBolder;
-    CGFloat photoViewY = CZHStatuCellBolder+CGRectGetMaxY(_contentLabelF);
-    _photoViewF = (CGRect){{photoViewX,photoViewY},photoLabelSize};
-
-    //topView高度
-    CGFloat topViewH = CGRectGetMaxY(_photoViewF)+CZHStatuCellBolder;
-    _topViewF = CGRectMake(topViewX, topViewY, topViewW, topViewH);
-    if (self.statues.thumbnail_pic != nil) {
-        _cellHeight =  topViewH;
+    if (self.statues.bmiddle_pic != nil) {
+        CGSize photoLabelSize = {100,100};
+        CGFloat photoViewX = CZHStatuCellBolder;
+        CGFloat photoViewY = CZHStatuCellBolder+CGRectGetMaxY(_contentLabelF);
+        _photoViewF = (CGRect){{photoViewX,photoViewY},photoLabelSize};
+        //topView高度
+        topViewH = CGRectGetMaxY(_photoViewF)+CZHStatuCellBolder;
     }else{
-        _cellHeight = topViewH-50;
+        //topView高度
+        topViewH = CGRectGetMaxY(_contentLabelF)+CZHStatuCellBolder;
     }
-
+    
+    //9.被转发微博
+    if (self.statues.retweeted_status != nil) {
+        //1.被转发微博视图
+        CGFloat retweetViewW = topViewW;
+        CGFloat retweetViewX = 0;
+        CGFloat retweetViewY = CGRectGetMaxY(_contentLabelF)+CZHStatuCellBolder;
+        CGFloat retweetViewH = 0;
+       
+        //被转发微博用户昵称
+        CGFloat retweetNameLabelX = CZHStatuCellBolder;
+        CGFloat retweetNameLabelY = CZHStatuCellBolder;
+        CGSize retweetNameLabelSize = [self.statues.retweeted_status.user.name sizeWithAttributes:@{NSFontAttributeName: CZHretweetNameFontSize}];
+        _retweetedNameLabelF = (CGRect){{retweetNameLabelX,retweetNameLabelY},retweetNameLabelSize};
+        
+        //被转发微博用户正文
+        CGFloat retweetContentLabelMaxW = retweetViewW- 2*CZHStatuCellBolder;
+        CGFloat retweetContentLabelY = CGRectGetMaxY(_retweetedNameLabelF);
+        CGFloat retweetContentLabelX = retweetNameLabelX;
+        CGSize  retweetContentLabelSize = [self.statues.retweeted_status.text boundingRectWithSize:CGSizeMake(retweetContentLabelMaxW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:CZHRetweetContentFontSize} context:nil].size;
+        _retweetedContentLabelF = (CGRect){{retweetContentLabelX,retweetContentLabelY},retweetContentLabelSize};
+        
+        //被转发微博高度
+        retweetViewH = CGRectGetMaxY(_retweetedContentLabelF)+CZHStatuCellBolder;
+        //被转发微博用户配图
+        if (self.statues.retweeted_status.bmiddle_pic) {
+            CGSize retweetPhotoLabelSize = {100,100};
+            CGFloat retweetPhotoViewX = retweetContentLabelX+CZHStatuCellBolder;
+            CGFloat retweetPhotoViewY = CZHStatuCellBolder+CGRectGetMaxY(_retweetedContentLabelF);
+            _retweetedPhotoViewF = (CGRect){{retweetPhotoViewX,retweetPhotoViewY},retweetPhotoLabelSize};
+            
+          
+            //被转发微博高度
+            retweetViewH = CGRectGetMaxY(_retweetedPhotoViewF)+CZHStatuCellBolder;
+            
+        }else{
+            //topView高度
+            retweetViewH = CGRectGetMaxY(_retweetedContentLabelF)+CZHStatuCellBolder;
+        }
+        _retweetedViewF = CGRectMake(retweetViewX, retweetViewY, retweetViewW, retweetViewH);
+        
+        if (self.statues.retweeted_status) {
+            topViewH = CGRectGetMaxY(_retweetedViewF);
+        }else{
+            topViewH = CGRectGetMaxY(_contentLabelF);
+        }
+    }else{
+        
+    
+    }
+    //顶部视图框架
+    _topViewF = CGRectMake(topViewX, topViewY, topViewW, topViewH);
+    
+    //1.工具栏frame
+    CGFloat statusToolBarW = cellW;
+    CGFloat statusToolBarX = 0;
+    CGFloat statusToolBarY = CGRectGetMaxY(_topViewF);
+    CGFloat statusToolBarH = CZHStatusToolBarH;
+    _statusToolBarF = CGRectMake(statusToolBarX, statusToolBarY, statusToolBarW, statusToolBarH);
+    
+    _cellHeight =  CGRectGetMaxY(_statusToolBarF)+CZHTableViewCellBolder;
 }
 
 @end
