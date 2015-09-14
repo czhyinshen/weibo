@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 /*微博昵称字体*/
 #define CZHNameLabelFontSize [UIFont systemFontOfSize:15]
 /*微博时间字体*/

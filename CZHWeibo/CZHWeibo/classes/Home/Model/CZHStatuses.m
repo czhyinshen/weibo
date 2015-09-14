@@ -7,8 +7,14 @@
 //
 
 #import "CZHStatuses.h"
-
+#import "MJExtension.h"
+#import "CZHPhoto.h"
 @implementation CZHStatuses
+
+//声明pic_urls 中的属性为CZHPhoto 类
+- (NSDictionary*)objectClassInArray{
+    return @{@"pic_urls":[CZHPhoto class]};
+}
 
 /**
  *  重写创建时间信息

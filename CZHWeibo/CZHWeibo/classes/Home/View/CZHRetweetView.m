@@ -7,6 +7,7 @@
 //
 
 #import "CZHRetweetView.h"
+#import "CZHPhoto.h"
 @interface CZHRetweetView ()
 /*  被转发微博的配图*/
 @property (nonatomic,weak)UIImageView *retweetedPhotoView;
@@ -67,8 +68,9 @@
         self.retweetedContentLabel.frame = self.statusFrame.retweetedContentLabelF;
         
         //被转发微博配图
-        if (retweetstatus.bmiddle_pic) {
-            [self.retweetedPhotoView setImageWithURL:[NSURL URLWithString:retweetstatus.bmiddle_pic] placeholderImage:[UIImage imageWithName:@"common_card_middle_background_highlighted"]];
+        if (retweetstatus.pic_urls.count) {
+            CZHPhoto *photo = retweetstatus.pic_urls[0];
+            [self.retweetedPhotoView setImageWithURL:[NSURL URLWithString:photo.thumbnail_pic] placeholderImage:[UIImage imageWithName:@"common_card_middle_background_highlighted"]];
             self.retweetedPhotoView.frame = self.statusFrame.retweetedPhotoViewF;
             self.retweetedPhotoView.hidden = NO;
         }else{

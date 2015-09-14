@@ -27,7 +27,7 @@
 /**
  *  缩略图片地址
  */
-@property (nonatomic,strong)NSString * bmiddle_pic;
+@property (nonatomic,strong)NSArray * pic_urls;
 /**
  *  微博的内容(文字)
  */

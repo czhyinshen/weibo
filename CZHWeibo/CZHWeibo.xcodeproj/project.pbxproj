@@ -13,6 +13,7 @@
 		C42B55E11BA6BB000020B353 /* CZHStatusToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55E01BA6BB000020B353 /* CZHStatusToolBar.m */; };
 		C42B55E41BA719D30020B353 /* CZHRetweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55E31BA719D30020B353 /* CZHRetweetView.m */; };
 		C42B55E71BA71D660020B353 /* CZHOriginalView.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55E61BA71D660020B353 /* CZHOriginalView.m */; };
+		C42B55F21BA73E6C0020B353 /* CZHPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55F11BA73E6C0020B353 /* CZHPhoto.m */; };
 		C42EB6C71B9C2F9600E000F7 /* CZHTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = C42EB6C61B9C2F9600E000F7 /* CZHTitleBtn.m */; };
 		C43E7E5B1B8D649300766A51 /* CZHTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E7E5A1B8D649300766A51 /* CZHTabButton.m */; };
 		C44532131BA0005A005992D7 /* CZHOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44532121BA0005A005992D7 /* CZHOAuthViewController.m */; };
@@ -100,6 +101,9 @@
 		C42B55E31BA719D30020B353 /* CZHRetweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHRetweetView.m; sourceTree = "<group>"; };
 		C42B55E51BA71D660020B353 /* CZHOriginalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHOriginalView.h; sourceTree = "<group>"; };
 		C42B55E61BA71D660020B353 /* CZHOriginalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHOriginalView.m; sourceTree = "<group>"; };
+		C42B55EF1BA73DCF0020B353 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../../../PrefixHeader.pch; sourceTree = "<group>"; };
+		C42B55F01BA73E6C0020B353 /* CZHPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHPhoto.h; sourceTree = "<group>"; };
+		C42B55F11BA73E6C0020B353 /* CZHPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHPhoto.m; sourceTree = "<group>"; };
 		C42EB6C51B9C2F9600E000F7 /* CZHTitleBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZHTitleBtn.h; path = CZHWeibo/classes/Home/View/CZHTitleBtn.h; sourceTree = SOURCE_ROOT; };
 		C42EB6C61B9C2F9600E000F7 /* CZHTitleBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CZHTitleBtn.m; path = CZHWeibo/classes/Home/View/CZHTitleBtn.m; sourceTree = SOURCE_ROOT; };
 		C43E7E591B8D649300766A51 /* CZHTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHTabButton.h; sourceTree = "<group>"; };
@@ -214,7 +218,6 @@
 		C474F20E1B95D5BD003C8C25 /* CZHSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHSearchBar.m; sourceTree = "<group>"; };
 		C474F2101B95E7E0003C8C25 /* UIBarButtonItem+CZH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+CZH.h"; sourceTree = "<group>"; };
 		C474F2111B95E7E0003C8C25 /* UIBarButtonItem+CZH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+CZH.m"; sourceTree = "<group>"; };
-		C474F2151B95ED1E003C8C25 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C47D4FB61BA659770045FA2C /* NSDate+CZH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+CZH.h"; path = "CZHWeibo/classes/other/Category/NSDate+CZH.h"; sourceTree = SOURCE_ROOT; };
 		C47D4FB71BA659770045FA2C /* NSDate+CZH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CZH.m"; path = "CZHWeibo/classes/other/Category/NSDate+CZH.m"; sourceTree = SOURCE_ROOT; };
 		C49523C11B94A9EC00433021 /* CZHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHNavigationController.h; sourceTree = "<group>"; };
@@ -471,6 +474,8 @@
 				C457E69F1BA169020006C3AE /* CZHUser.m */,
 				C446E7481BA2C55A00ACAF54 /* CZHStatusFrame.h */,
 				C446E7491BA2C55A00ACAF54 /* CZHStatusFrame.m */,
+				C42B55F01BA73E6C0020B353 /* CZHPhoto.h */,
+				C42B55F11BA73E6C0020B353 /* CZHPhoto.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -607,7 +612,7 @@
 				C474F2031B95C99F003C8C25 /* Category */,
 				C4574DD81B8CC53A0036748B /* AppDelegate.h */,
 				C4574DD91B8CC53A0036748B /* AppDelegate.m */,
-				C474F2151B95ED1E003C8C25 /* PrefixHeader.pch */,
+				C42B55EF1BA73DCF0020B353 /* PrefixHeader.pch */,
 				C44532351BA05815005992D7 /* tool */,
 				C44532141BA00624005992D7 /* lib */,
 			);
@@ -881,6 +886,7 @@
 				C457E6931BA15A170006C3AE /* SDWebImageCompat.m in Sources */,
 				C457E6911BA15A170006C3AE /* NSData+ImageContentType.m in Sources */,
 				C42B55E11BA6BB000020B353 /* CZHStatusToolBar.m in Sources */,
+				C42B55F21BA73E6C0020B353 /* CZHPhoto.m in Sources */,
 				C44532381BA0582E005992D7 /* CZHWeiboTool.m in Sources */,
 				C445322F1BA00624005992D7 /* AFURLRequestSerialization.m in Sources */,
 				C4574DD41B8CBEBA0036748B /* CZHTabBarController.m in Sources */,
@@ -996,6 +1002,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = CZHWeibo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -1010,6 +1017,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = CZHWeibo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;

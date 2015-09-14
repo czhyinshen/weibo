@@ -7,6 +7,7 @@
 //
 
 #import "CZHOriginalView.h"
+#import "CZHPhoto.h"
 @interface CZHOriginalView ()
 
 /*  头像视图*/
@@ -140,9 +141,10 @@
     self.contentLabel.frame = self.statusFrame.contentLabelF;
     
     //微博配图
-    if (status.bmiddle_pic) {
+    if (status.pic_urls.count) {
         self.photoView.hidden = NO;
-        [self.photoView setImageWithURL:[NSURL URLWithString:status.bmiddle_pic] placeholderImage:[UIImage imageNamed:@"common_card_middle_background_highlighted_os7"]];
+        CZHPhoto *photo = status.pic_urls[0];
+        [self.photoView setImageWithURL:[NSURL URLWithString:photo.thumbnail_pic] placeholderImage:[UIImage imageNamed:@"common_card_middle_background_highlighted_os7"]];
         self.photoView.backgroundColor = [UIColor clearColor];
         self.photoView.frame = self.statusFrame.photoViewF;
     }else{

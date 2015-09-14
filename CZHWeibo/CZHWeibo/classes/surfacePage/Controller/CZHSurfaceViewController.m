@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 tarena. All rights reserved.
 //
 
+
 #import "CZHSurfaceViewController.h"
 #import "CZHSurfaceScrollView.h"
 #import "CZHTabBarController.h"
 #import "CZHCheckBox.h"
+#import "UIImage+CZHCustomImg.h"
 #define CZHSurfaceViewImageViewCount 3
-
-#define CZHColor(r,g,b)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
 @interface CZHSurfaceViewController ()<UIScrollViewDelegate>
 @property (nonatomic,strong)UIPageControl *pageControl;

@@ -66,7 +66,7 @@
     
     //8.配图视图
     
-    if (self.statues.bmiddle_pic != nil) {
+    if (self.statues.pic_urls.count != nil) {
         CGSize photoLabelSize = {100,100};
         CGFloat photoViewX = CZHStatuCellBolder;
         CGFloat photoViewY = CZHStatuCellBolder+CGRectGetMaxY(_contentLabelF);
@@ -102,7 +102,7 @@
         //被转发微博高度
         retweetViewH = CGRectGetMaxY(_retweetedContentLabelF)+CZHStatuCellBolder;
         //被转发微博用户配图
-        if (self.statues.retweeted_status.bmiddle_pic) {
+        if (self.statues.retweeted_status.pic_urls.count) {
             CGSize retweetPhotoLabelSize = {100,100};
             CGFloat retweetPhotoViewX = retweetContentLabelX+CZHStatuCellBolder;
             CGFloat retweetPhotoViewY = CZHStatuCellBolder+CGRectGetMaxY(_retweetedContentLabelF);
