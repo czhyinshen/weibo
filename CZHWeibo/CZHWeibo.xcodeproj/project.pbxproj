@@ -12,6 +12,7 @@
 		438F97A01B8C8083006BB4E5 /* CZHWeiboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 438F979F1B8C8083006BB4E5 /* CZHWeiboTests.m */; };
 		C42B55E11BA6BB000020B353 /* CZHStatusToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55E01BA6BB000020B353 /* CZHStatusToolBar.m */; };
 		C42B55E41BA719D30020B353 /* CZHRetweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55E31BA719D30020B353 /* CZHRetweetView.m */; };
+		C42B55E71BA71D660020B353 /* CZHOriginalView.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55E61BA71D660020B353 /* CZHOriginalView.m */; };
 		C42EB6C71B9C2F9600E000F7 /* CZHTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = C42EB6C61B9C2F9600E000F7 /* CZHTitleBtn.m */; };
 		C43E7E5B1B8D649300766A51 /* CZHTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E7E5A1B8D649300766A51 /* CZHTabButton.m */; };
 		C44532131BA0005A005992D7 /* CZHOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44532121BA0005A005992D7 /* CZHOAuthViewController.m */; };
@@ -97,6 +98,8 @@
 		C42B55E01BA6BB000020B353 /* CZHStatusToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHStatusToolBar.m; sourceTree = "<group>"; };
 		C42B55E21BA719D30020B353 /* CZHRetweetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHRetweetView.h; sourceTree = "<group>"; };
 		C42B55E31BA719D30020B353 /* CZHRetweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHRetweetView.m; sourceTree = "<group>"; };
+		C42B55E51BA71D660020B353 /* CZHOriginalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHOriginalView.h; sourceTree = "<group>"; };
+		C42B55E61BA71D660020B353 /* CZHOriginalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHOriginalView.m; sourceTree = "<group>"; };
 		C42EB6C51B9C2F9600E000F7 /* CZHTitleBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZHTitleBtn.h; path = CZHWeibo/classes/Home/View/CZHTitleBtn.h; sourceTree = SOURCE_ROOT; };
 		C42EB6C61B9C2F9600E000F7 /* CZHTitleBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CZHTitleBtn.m; path = CZHWeibo/classes/Home/View/CZHTitleBtn.m; sourceTree = SOURCE_ROOT; };
 		C43E7E591B8D649300766A51 /* CZHTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHTabButton.h; sourceTree = "<group>"; };
@@ -477,6 +480,8 @@
 			children = (
 				C446E7451BA2B43600ACAF54 /* CZHStatusesTableViewCell.h */,
 				C446E74B1BA2D8BD00ACAF54 /* CZHStatusesTableViewCell.m */,
+				C42B55E51BA71D660020B353 /* CZHOriginalView.h */,
+				C42B55E61BA71D660020B353 /* CZHOriginalView.m */,
 				C42B55E21BA719D30020B353 /* CZHRetweetView.h */,
 				C42B55E31BA719D30020B353 /* CZHRetweetView.m */,
 				C42B55DF1BA6BB000020B353 /* CZHStatusToolBar.h */,
@@ -855,6 +860,7 @@
 				C42B55E41BA719D30020B353 /* CZHRetweetView.m in Sources */,
 				C4C4A4B31B8F3AA50007E88A /* CZHBadgeButton.m in Sources */,
 				C44532341BA014E2005992D7 /* CZHAccount.m in Sources */,
+				C42B55E71BA71D660020B353 /* CZHOriginalView.m in Sources */,
 				C457E6BE1BA16ACF0006C3AE /* NSObject+MJCoding.m in Sources */,
 				C42EB6C71B9C2F9600E000F7 /* CZHTitleBtn.m in Sources */,
 				C43E7E5B1B8D649300766A51 /* CZHTabButton.m in Sources */,
