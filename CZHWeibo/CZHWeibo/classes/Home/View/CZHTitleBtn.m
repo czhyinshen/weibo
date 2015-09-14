@@ -10,7 +10,7 @@
 #define CZHTitleBtnimageWidth 30
 @interface CZHTitleBtn()
 {
-    NSUInteger titleSize;
+    NSUInteger titleSizeW;
 }
 @end
 @implementation CZHTitleBtn
@@ -50,10 +50,10 @@
     if (self.titleLabel.text) {
         [self setAttributedTitle:[[NSAttributedString alloc]initWithString:self.titleLabel.text attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16]}] forState:UIControlStateNormal];
       
-        titleSize = [self.titleLabel.text lengthOfBytesUsingEncoding:NSUTF8StringEncoding]*8+35;
+        titleSizeW = [self.titleLabel.text lengthOfBytesUsingEncoding:NSUTF8StringEncoding]*8+35;
         
-        if (titleSize < self.frame.size.width) {
-            titleSize = self.frame.size.width;
+        if (titleSizeW < self.frame.size.width) {
+            titleSizeW = self.frame.size.width;
         }
     }
 
@@ -66,9 +66,9 @@
     CGFloat titleH = contentRect.size.height;
     CGFloat titleW = contentRect.size.width-CZHTitleBtnimageWidth;
     
-    if (titleSize) {
+    if (titleSizeW) {
     
-        return CGRectMake(titleX, titleY, titleSize-CZHTitleBtnimageWidth, titleH);
+        return CGRectMake(titleX, titleY, titleSizeW-CZHTitleBtnimageWidth, titleH);
     }
    
     return CGRectMake(titleX, titleY, titleW, titleH);
@@ -81,9 +81,9 @@
     CGFloat titleW = CZHTitleBtnimageWidth;
     CGFloat titleH = contentRect.size.height;
     
-    if (titleSize) {
+    if (titleSizeW) {
     
-        return CGRectMake(titleSize-CZHTitleBtnimageWidth, titleY, titleW, titleH);
+        return CGRectMake(titleSizeW-CZHTitleBtnimageWidth, titleY, titleW, titleH);
     }
     
     return CGRectMake(titleX, titleY, titleW, titleH);
@@ -91,6 +91,6 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y , titleSize, self.frame.size.height);
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y , titleSizeW, self.frame.size.height);
 }
 @end

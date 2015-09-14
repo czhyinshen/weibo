@@ -13,12 +13,15 @@
 @property (nonatomic,strong)NSString *name;
 @property (nonatomic,strong)NSString *idstr;
 @property (nonatomic,strong)NSString *profile_image_url;
+
 @property (nonatomic,strong)NSString * avatar_large;
 /**
  *  是否是Vip
  */
-
-@property (nonatomic,getter=isVIP) BOOL*vip;
+/*会员类型**/
+@property (nonatomic,assign) int mbtype;
+/*会员等级**/
+@property (nonatomic,assign) int mbrank;
 
 @end
 
@@ -59,4 +62,61 @@
  online_status	int	用户的在线状态，0：不在线、1：在线
  bi_followers_count	int	用户的互粉数
  lang	string	用户当前的语言版本，zh-cn：简体中文，zh-tw：繁体中文，en：英语
+ 
+ ---------------------------------------- ---------------------------------------- ----------------------------------------
+ "allow_all_act_msg" = 1;
+ "allow_all_comment" = 1;
+ "avatar_hd" = "http://tp4.sinaimg.cn/2671109275/180/5667209124/0";
+ "avatar_large" = "http://tp4.sinaimg.cn/2671109275/180/5667209124/0";
+ "bi_followers_count" = 1463;
+ "block_app" = 1;
+ "block_word" = 0;
+ cardid = "star_005";
+ city = 8;
+ class = 1;
+ "created_at" = "Wed Mar 21 10:31:42 +0800 2012";
+ "credit_score" = 80;
+ description = "\U6559\U6388\U65b0\U624b\U4f7f\U7528\U5fae\U535a\U65b9\U6cd5\U4e13\U4e1a\U6237\Uff0c\U6bcf\U5929\U63a8\U8350\U65b9\U6cd5\U4ecb\U7ecd\U3001\U5fae\U535a\U70ed\U70b9...\U6709\U95ee\U9898\U8bf7call\U6211\Uff0c@\U3001\U79c1\U4fe1\U90fd\U53ef\U4ee5\Uff0c\U6b22\U8fce\U9a9a\U6270~";
+ domain = "";
+ "favourites_count" = 2351;
+ "follow_me" = 0;
+ "followers_count" = 115835997;
+ following = 1;
+ "friends_count" = 1902;
+ gender = f;
+ "geo_enabled" = 1;
+ id = 2671109275;
+ idstr = 2671109275;
+ lang = "zh-cn";
+ location = "\U5317\U4eac \U6d77\U6dc0\U533a";
+ mbrank = 6;
+ mbtype = 12;
+ name = "\U65b0\U624b\U6307\U5357";
+ "online_status" = 0;
+ "pagefriends_count" = 30;
+ "profile_image_url" = "http://tp4.sinaimg.cn/2671109275/50/5667209124/0";
+ "profile_url" = "u/2671109275";
+ province = 11;
+ ptype = 0;
+ remark = "";
+ "screen_name" = "\U65b0\U624b\U6307\U5357";
+ star = 0;
+ "statuses_count" = 9380;
+ urank = 27;
+ url = "http://www.weibo.com/guide/handbook";
+ "user_ability" = 0;
+ verified = 1;
+ "verified_contact_email" = "";
+ "verified_contact_mobile" = "";
+ "verified_contact_name" = "";
+ "verified_level" = 3;
+ "verified_reason" = "\U65b0\U6d6a\U5fae\U535a\U65b0\U624b\U6307\U5357\U5b98\U65b9\U5fae\U535a";
+ "verified_reason_modified" = "";
+ "verified_reason_url" = "";
+ "verified_source" = "";
+ "verified_source_url" = "";
+ "verified_state" = 0;
+ "verified_trade" = "";
+ "verified_type" = 7;
+ weihao = "";
  */

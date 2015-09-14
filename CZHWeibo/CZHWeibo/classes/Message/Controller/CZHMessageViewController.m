@@ -19,9 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIButton*btn = [UIButton ButtonWithTitle:@"写私信" image:nil highlightedImage:nil target:self action:@selector( writePersonalMsg)];
+    UIBarButtonItem*btn = [UIBarButtonItem ButtonWithTitle:@"写私信" image:nil highlightedImage:nil target:self action:@selector( writePersonalMsg)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = btn;
 }
 
 - (void)writePersonalMsg{

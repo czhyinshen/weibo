@@ -26,7 +26,7 @@
 
 #define  CZHTableViewCellBolder 10
 
-#define  CZHStatusToolBarH 30
+#define  CZHStatusToolBarH 35
 
 @class CZHStatuses;
 

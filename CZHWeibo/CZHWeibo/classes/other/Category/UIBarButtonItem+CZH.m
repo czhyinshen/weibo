@@ -6,13 +6,12 @@
 //  Copyright (c) 2015年 tarena. All rights reserved.
 //
 
-#import "UIButton+CZH.h"
+#import "UIBarButtonItem+CZH.h"
 
-@implementation UIButton (CZH)
+@implementation UIBarButtonItem (CZH)
 
 
-+ (UIButton*)ButtonWithTitle:(NSString*)title image:(NSString*)image highlightedImage:(NSString*)hi target:(id)target action:(SEL)action{
-    
++ (UIBarButtonItem*)ButtonWithTitle:(NSString*)title image:(NSString*)image highlightedImage:(NSString*)hi target:(id)target action:(SEL)action{
     UIButton*btn = [[UIButton alloc]init];
     
     if(image){
@@ -28,11 +27,11 @@
         
         [btn setAttributedTitle:[[NSAttributedString alloc]initWithString:title attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor grayColor]}] forState:UIControlStateHighlighted];
     }
-    
-    btn.frame = CGRectMake(0, 0, 50, 50);
-    
+
+    btn.frame = (CGRect){CGPointZero,btn.currentImage.size};
+
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    return btn;
+    return [[UIBarButtonItem alloc]initWithCustomView:btn];;
     
 }
 

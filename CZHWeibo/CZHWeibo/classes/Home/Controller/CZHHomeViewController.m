@@ -51,14 +51,15 @@
 
 - (void)setUPBarbuttonItem{
 
-    UIButton* lefBtn = [UIButton ButtonWithTitle:nil image:@"navigationbar_friendsearch" highlightedImage:@"navigationbar_friendsearch_highlighted" target:self action:nil];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:lefBtn];
+    UIBarButtonItem* lefBtn = [UIBarButtonItem ButtonWithTitle:nil image:@"navigationbar_friendsearch" highlightedImage:@"navigationbar_friendsearch_highlighted" target:self action:nil];
+    self.navigationItem.leftBarButtonItem = lefBtn;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton ButtonWithTitle:nil image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted" target:self action:nil]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem ButtonWithTitle:nil image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted" target:self action:nil];
     
     self.tableView.backgroundColor =  [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, CZHTableViewCellBolder, 0);
+    
 }
 
 - (void)setUpTitleView{
@@ -101,7 +102,6 @@
         
         NSArray *statusArray = [CZHStatuses objectArrayWithKeyValuesArray:responseObject[@"statuses"] ];
         NSMutableArray *statusFrames = [NSMutableArray array];
-        
         for (CZHStatuses *status in statusArray) {
             
             CZHStatusFrame*statusesFrame = [[CZHStatusFrame alloc]init];

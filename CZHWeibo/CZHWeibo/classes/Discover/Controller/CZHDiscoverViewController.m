@@ -7,7 +7,7 @@
 //
 
 #import "CZHDiscoverViewController.h"
-#import "UIButton+CZH.h"
+#import "UIBarButtonItem+CZH.h"
 #import "CZHSearchBar.h"
 
 @interface CZHDiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>

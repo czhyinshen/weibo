@@ -48,7 +48,7 @@
     CGFloat TimeLabelX = nameLabelX;
     CGFloat TimeLabelY = CGRectGetMaxY(_nameLabelF) + CZHStatuCellBolder/2;
     _TimeLabelF= (CGRect){{TimeLabelX,TimeLabelY},TimeLabelSize};
-
+    
     //6.来源
     CGSize sourceLabelSize = [self.statues.source sizeWithAttributes:@{NSFontAttributeName: CZHSourceFontSize}];
     CGFloat sourceLabelX = CGRectGetMaxX(_TimeLabelF)+CZHStatuCellBolder;
@@ -81,8 +81,8 @@
     //9.被转发微博
     if (self.statues.retweeted_status != nil) {
         //1.被转发微博视图
-        CGFloat retweetViewW = topViewW;
-        CGFloat retweetViewX = 0;
+        CGFloat retweetViewW = topViewW-CZHStatuCellBolder;
+        CGFloat retweetViewX = CZHStatuCellBolder/2;
         CGFloat retweetViewY = CGRectGetMaxY(_contentLabelF)+CZHStatuCellBolder;
         CGFloat retweetViewH = 0;
        
@@ -133,7 +133,7 @@
     //1.工具栏frame
     CGFloat statusToolBarW = cellW;
     CGFloat statusToolBarX = 0;
-    CGFloat statusToolBarY = CGRectGetMaxY(_topViewF);
+    CGFloat statusToolBarY = CGRectGetMaxY(_topViewF)+CZHStatuCellBolder/2;
     CGFloat statusToolBarH = CZHStatusToolBarH;
     _statusToolBarF = CGRectMake(statusToolBarX, statusToolBarY, statusToolBarW, statusToolBarH);
     

@@ -8,6 +8,8 @@
 
 #import "CZHStatusesTableViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "CZHStatusToolBar.h"
+#import "CZHRetweetView.h"
 
 @interface CZHStatusesTableViewCell()
 
@@ -38,9 +40,11 @@
 /*  被转发微博的昵称*/
 @property (nonatomic,weak)UILabel *retweetedNameLabel;
 
+/*  被转发微博视图*/
+@property (nonatomic,strong)CZHRetweetView *retweetView;
 
 /*  微博的工具条*/
-@property (nonatomic,weak)UIImageView *statusToolBar;
+@property (nonatomic,weak)CZHStatusToolBar *statusToolBar;
 
 
 @end
@@ -73,6 +77,7 @@
         //设置微博工具栏
         [self setUpStatuToolBar];
         
+        
     }
     return self;
 }
@@ -80,6 +85,7 @@
 - (void)setFrame:(CGRect)frame{
     frame.origin.y += 10;
     frame.size.height -= CZHTableViewCellBolder;
+    
     [super setFrame:frame];
 
 }
@@ -91,6 +97,8 @@
      UIImageView*topView= [[UIImageView alloc]init];
     [self.contentView addSubview: topView];
     self.topView = topView;
+    topView.image = [UIImage resizingImageWithName:@"timeline_card_top_background"];
+    topView.highlightedImage = [UIImage resizingImageWithName:@"timeline_card_top_background_highlighted"];
     
     /*  头像视图*/
     UIImageView*iconView= [[UIImageView alloc]init];
@@ -136,7 +144,7 @@
 - (void)setUpRetweetSubView{
     
    /*  被转发微博的View*/
-    UIImageView*retweetedView= [[UIImageView alloc]init];
+    CZHRetweetView*retweetedView= [[CZHRetweetView alloc]init];
     [self.topView addSubview: retweetedView];
     self.retweetedView = retweetedView;
     
@@ -163,7 +171,7 @@
  *  设置微博工具栏
  */
 - (void)setUpStatuToolBar{
-    UIImageView*statusToolBar= [[UIImageView alloc]init];
+    CZHStatusToolBar*statusToolBar= [[CZHStatusToolBar alloc]init];
     [self.contentView addSubview: statusToolBar];
     self.statusToolBar = statusToolBar;
 }
@@ -193,13 +201,14 @@
     self.iconView.backgroundColor = [UIColor clearColor];
 
     //微博vip
-    if (user.isVIP) {
+    if (user.mbtype) {
         self.VipView.hidden = NO;
-        [self.VipView setImage:[UIImage imageWithName:@"common_icon_membership"]];
+        [self.VipView setImage:[UIImage imageWithName:[NSString stringWithFormat:@"common_icon_membership_level%d",user.mbrank]]];
         self.VipView.backgroundColor = [UIColor clearColor];
         self.VipView.frame = self.statusFrame.VipViewF;
         
     }else{
+        [self.VipView setImage:[UIImage imageWithName:[NSString stringWithFormat:@"common_icon_membership_expired"]]];
         self.VipView.hidden = YES;
     }
     
@@ -208,7 +217,15 @@
     self.TimeLabel.font = CZHTimeLabelFontSize;
     self.TimeLabel.backgroundColor = [UIColor clearColor];
     self.TimeLabel.frame = self.statusFrame.TimeLabelF;
+
+    //每次都会设置frame 为了每次让status的时间的值可以实时更新到界面
+    CGSize TimeLabelSize = [self.statusFrame.statues.created_at sizeWithAttributes:@{NSFontAttributeName: CZHTimeLabelFontSize}];
+    CGFloat TimeLabelX = self.statusFrame.nameLabelF.origin.x;
+    CGFloat TimeLabelY = CGRectGetMaxY(self.nameLabel.frame) + CZHStatuCellBolder/2;
     self.TimeLabel.textColor = [UIColor colorWithRed:240.0/255.0 green:66.0/255.0 blue:20.0/255.0 alpha:1];
+    self.TimeLabel.frame= (CGRect){{TimeLabelX,TimeLabelY},TimeLabelSize};
+
+    
     //微博来源
     self.sourceLabel.numberOfLines = 0;
     self.sourceLabel.text = status.source;
@@ -280,7 +297,8 @@
 */
 - (void)setUpStatusToolBar{
     self.statusToolBar.frame = self.statusFrame.statusToolBarF;
-    [self.statusToolBar setImage:[UIImage resizingImageWithName:@"common_card_middle_background"]];
+    self.statusToolBar.statuses = self.statusFrame.statues;
+    
 }
 
 

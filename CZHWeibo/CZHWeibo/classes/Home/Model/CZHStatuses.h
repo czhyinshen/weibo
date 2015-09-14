@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CZHUser.h"
+#import "NSDate+CZH.h"
 @interface CZHStatuses : NSObject
 
 /**
