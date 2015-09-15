@@ -8,6 +8,13 @@
 
 #import "CZHOriginalView.h"
 #import "CZHPhoto.h"
+#import "CZHRetweetView.h"
+#import "CZHStatusFrame.h"
+#import "CZHStatuses.h"
+#import "CZHUser.h"
+#import "UIImageView+WebCache.h"
+#import "CZHPhotosView.h"
+
 @interface CZHOriginalView ()
 
 /*  头像视图*/
@@ -21,7 +28,7 @@
 /*  来源*/
 @property (nonatomic,weak)UILabel *sourceLabel;
 /*  配图视图*/
-@property (nonatomic,weak)UIImageView *photoView;
+@property (nonatomic,weak)CZHPhotosView *photoView;
 /*  微博正文内容*/
 @property (nonatomic,weak)UILabel * contentLabel;
 
@@ -34,7 +41,9 @@
 - (instancetype)initWithFrame:(CGRect)frame{
    
     if (self = [super initWithFrame:frame]) {
-     
+        
+        self.userInteractionEnabled = YES;
+        
         self.image = [UIImage resizingImageWithName:@"timeline_card_top_background"];
         self.highlightedImage = [UIImage resizingImageWithName:@"timeline_card_top_background_highlighted"];
         
@@ -64,7 +73,7 @@
         self.sourceLabel = sourceLabel;
         
         /*  配图视图*/
-        UIImageView*photoView= [[UIImageView alloc]init];
+        CZHPhotosView*photoView= [[CZHPhotosView alloc]init];
         [self addSubview: photoView];
         self.photoView = photoView;
         
@@ -143,13 +152,10 @@
     //微博配图
     if (status.pic_urls.count) {
         self.photoView.hidden = NO;
-        CZHPhoto *photo = status.pic_urls[0];
-        [self.photoView setImageWithURL:[NSURL URLWithString:photo.thumbnail_pic] placeholderImage:[UIImage imageNamed:@"common_card_middle_background_highlighted_os7"]];
-        self.photoView.backgroundColor = [UIColor clearColor];
+        self.photoView.photos = status.pic_urls;
         self.photoView.frame = self.statusFrame.photoViewF;
     }else{
         self.photoView.hidden = YES;
-        self.photoView.frame = CGRectZero;
     }
    
     //被转发微博数据

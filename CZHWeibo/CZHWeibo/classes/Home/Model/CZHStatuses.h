@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CZHUser.h"
-#import "NSDate+CZH.h"
+
+@class CZHUser;
+
 @interface CZHStatuses : NSObject
 
 /**
@@ -47,7 +48,10 @@
  *  微博的表态数(被赞数)
  */
 @property (nonatomic, assign) int attitudes_count;
-
+/**
+ *  字符串型的微博ID
+ */
+@property (nonatomic, strong) NSString* idstr;
 
 @end
 /*

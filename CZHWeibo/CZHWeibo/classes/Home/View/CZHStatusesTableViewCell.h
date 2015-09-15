@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZHStatuses.h"
-#import "CZHStatusFrame.h"
+@class CZHStatusFrame;
+
 @interface CZHStatusesTableViewCell : UITableViewCell
 
 + (CZHStatusesTableViewCell*)cellWithTableView:(UITableView*)tableView;

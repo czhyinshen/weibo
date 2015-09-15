@@ -8,9 +8,14 @@
 
 #import "CZHRetweetView.h"
 #import "CZHPhoto.h"
+#import "CZHStatuses.h"
+#import "CZHStatusFrame.h"
+#import "CZHUser.h"
+#import "CZHPhotosView.h"
+#import "UIImageView+WebCache.h"
 @interface CZHRetweetView ()
 /*  被转发微博的配图*/
-@property (nonatomic,weak)UIImageView *retweetedPhotoView;
+@property (nonatomic,weak)CZHPhotosView *retweetedPhotoView;
 /*  被转发微博的内容*/
 @property (nonatomic,weak)UILabel *retweetedContentLabel;
 /*  被转发微博的昵称*/
@@ -23,6 +28,7 @@
     if (self = [super initWithFrame:frame]) {
         //设置背景图片
         [self setImage:[UIImage resizingImageWithName:@"timeline_retweet_background" left:0.9 top:0.5]];
+        self.userInteractionEnabled = YES;
         
         /*  被转发微博的昵称*/
         UILabel*retweetedNameLabel= [[UILabel alloc]init];
@@ -35,7 +41,7 @@
         self.retweetedContentLabel = retweetedContentLabel;
         
         /*  被转发微博的配图*/
-        UIImageView*retweetedPhotoView= [[UIImageView alloc]init];
+        CZHPhotosView*retweetedPhotoView= [[CZHPhotosView alloc]init];
         [self addSubview: retweetedPhotoView];
         self.retweetedPhotoView = retweetedPhotoView;
     }
@@ -69,8 +75,7 @@
         
         //被转发微博配图
         if (retweetstatus.pic_urls.count) {
-            CZHPhoto *photo = retweetstatus.pic_urls[0];
-            [self.retweetedPhotoView setImageWithURL:[NSURL URLWithString:photo.thumbnail_pic] placeholderImage:[UIImage imageWithName:@"common_card_middle_background_highlighted"]];
+            self.retweetedPhotoView.photos = retweetstatus.pic_urls;
             self.retweetedPhotoView.frame = self.statusFrame.retweetedPhotoViewF;
             self.retweetedPhotoView.hidden = NO;
         }else{

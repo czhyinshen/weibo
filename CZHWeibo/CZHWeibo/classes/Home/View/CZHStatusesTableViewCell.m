@@ -10,7 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import "CZHStatusToolBar.h"
 #import "CZHOriginalView.h"
-
+#import "CZHStatuses.h"
+#import "CZHStatusFrame.h"
 @interface CZHStatusesTableViewCell()
 
 /*  原创微博视图*/
@@ -42,7 +43,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 
     if (self) {
-        
+        self.backgroundColor =[UIColor clearColor];
         //设置原创微博
         [self setUpOrigionalSubView];
         //设置微博工具栏

@@ -10,6 +10,7 @@
 #import "CZHStatuses.h"
 #import "CZHUser.h"
 #import "UIImageView+WebCache.h"
+#import "CZHPhotosView.h"
 
 @implementation CZHStatusFrame
 
@@ -66,11 +67,12 @@
     
     //8.配图视图
     
-    if (self.statues.pic_urls.count != nil) {
-        CGSize photoLabelSize = {100,100};
-        CGFloat photoViewX = CZHStatuCellBolder;
+    if (self.statues.pic_urls.count) {
+        CZHPhotosView *photosView = [[CZHPhotosView alloc]init];
+        CGSize photoViewSize = [photosView photoSizeWithPhotoCount:self.statues.pic_urls.count];
+        CGFloat photoViewX = CZHStatuCellBolder*1.5;
         CGFloat photoViewY = CZHStatuCellBolder+CGRectGetMaxY(_contentLabelF);
-        _photoViewF = (CGRect){{photoViewX,photoViewY},photoLabelSize};
+        _photoViewF = (CGRect){{photoViewX,photoViewY},photoViewSize};
         //topView高度
         topViewH = CGRectGetMaxY(_photoViewF)+CZHStatuCellBolder;
     }else{
@@ -103,11 +105,12 @@
         retweetViewH = CGRectGetMaxY(_retweetedContentLabelF)+CZHStatuCellBolder;
         //被转发微博用户配图
         if (self.statues.retweeted_status.pic_urls.count) {
-            CGSize retweetPhotoLabelSize = {100,100};
-            CGFloat retweetPhotoViewX = retweetContentLabelX+CZHStatuCellBolder;
-            CGFloat retweetPhotoViewY = CZHStatuCellBolder+CGRectGetMaxY(_retweetedContentLabelF);
-            _retweetedPhotoViewF = (CGRect){{retweetPhotoViewX,retweetPhotoViewY},retweetPhotoLabelSize};
+            CZHPhotosView *photosView = [[CZHPhotosView alloc]init];
+            CGSize retweetPhotoSize = [photosView photoSizeWithPhotoCount:self.statues.retweeted_status.pic_urls.count];
             
+            CGFloat retweetPhotoViewX = retweetContentLabelX;
+            CGFloat retweetPhotoViewY = CZHStatuCellBolder+CGRectGetMaxY(_retweetedContentLabelF);
+            _retweetedPhotoViewF = (CGRect){{retweetPhotoViewX,retweetPhotoViewY},retweetPhotoSize};
           
             //被转发微博高度
             retweetViewH = CGRectGetMaxY(_retweetedPhotoViewF)+CZHStatuCellBolder;

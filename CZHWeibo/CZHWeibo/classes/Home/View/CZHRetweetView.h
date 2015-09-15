@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZHStatuses.h"
-#import "CZHStatusFrame.h"
-#import "CZHUser.h"
-#import "UIImageView+WebCache.h"
+@class CZHStatusFrame;
 
 @interface CZHRetweetView : UIImageView
 @property (nonatomic,strong)CZHStatusFrame *statusFrame;

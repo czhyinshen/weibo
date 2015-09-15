@@ -9,6 +9,8 @@
 #import "CZHStatuses.h"
 #import "MJExtension.h"
 #import "CZHPhoto.h"
+#import "CZHUser.h"
+#import "NSDate+CZH.h"
 @implementation CZHStatuses
 
 //声明pic_urls 中的属性为CZHPhoto 类
@@ -54,13 +56,15 @@
  *  @return 来自XXXXX
  */
 - (void)setSource:(NSString *)source{
-
-    NSRange headRange = [source rangeOfString:@">"];
-    NSString *str = [source substringFromIndex:headRange.location+1];
-    NSRange tailRange = [str rangeOfString:@"</"];
-    NSString *soruceStr = [str substringToIndex:tailRange.location];
     
-    _source =  [NSString stringWithFormat:@"来自%@",soruceStr];
+    if (![source isEqualToString:@""]) {
+        NSRange headRange = [source rangeOfString:@">"];
+        NSString *str = [source substringFromIndex:headRange.location+1];
+        NSRange tailRange = [str rangeOfString:@"</"];
+        NSString *soruceStr = [str substringToIndex:tailRange.location];
+        
+        _source =  [NSString stringWithFormat:@"来自%@",soruceStr];
+    }
 }
 
 

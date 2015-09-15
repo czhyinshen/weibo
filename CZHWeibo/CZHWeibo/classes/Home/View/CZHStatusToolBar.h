@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZHStatuses.h"
+@class CZHStatusFrame;
+@class CZHStatuses;
+
 @interface CZHStatusToolBar : UIImageView
 
 @property (nonatomic,strong) CZHStatuses *statuses;

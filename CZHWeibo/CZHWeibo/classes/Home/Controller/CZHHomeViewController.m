@@ -23,15 +23,15 @@
 #define titleBtnUpImageTag 1
 
 @interface CZHHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic,strong)NSArray  *statusesFrame;
+@property (nonatomic,strong)NSMutableArray  *statusesFrame;
 
 @end
 
 @implementation CZHHomeViewController
 
--(NSArray *)statuses{
+-(NSMutableArray *)statuses{
     if (!_statusesFrame) {
-        _statusesFrame = [NSArray array];
+        _statusesFrame = [NSMutableArray array];
     }
     return _statusesFrame;
 }
@@ -39,15 +39,108 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
+    //刷新数据
+    [self setUpRefreshController];
+    
     [self setUPBarbuttonItem];
 
     [self setUpTitleView];
     
-    [self updateStatusData];
-    
 }
 
+- (void)setUpRefreshController{
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
+    [refreshControl addTarget:self action:@selector(refreshData:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+    [refreshControl beginRefreshing];
+    if(refreshControl.refreshing){
+        refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"正在刷新" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10],NSForegroundColorAttributeName:[UIColor grayColor]}];
+    }
+    
+    [self refreshData:refreshControl];
+}
+
+- (void)refreshData:(UIRefreshControl*)refresh{
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+   
+    NSMutableDictionary*param = [NSMutableDictionary dictionary];
+    param[@"access_token"] = [CZHAccountTool account].access_token;
+    if (self.statusesFrame.count) {
+        CZHStatusFrame *statusFrame = self.statusesFrame[0];
+        param[@"since_id"] = statusFrame.statues.idstr;
+    }
+    
+    [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSArray *statusArray = [CZHStatuses objectArrayWithKeyValuesArray:responseObject[@"statuses"] ];
+        NSMutableArray *statusFrames = [NSMutableArray array];
+        for (CZHStatuses *status in statusArray) {
+            
+            CZHStatusFrame*statusesFrame = [[CZHStatusFrame alloc]init];
+            statusesFrame.statues = status;
+            
+            [statusFrames addObject:statusesFrame];
+        }
+        //将新微博添加到微博数组头
+        NSMutableArray *tempArray = [NSMutableArray array];
+        [tempArray addObjectsFromArray:statusFrames];
+        [tempArray addObjectsFromArray: self.statusesFrame];
+        self.statusesFrame = tempArray;
+        
+        [self.tableView reloadData];
+        //停止刷新
+        [refresh endRefreshing];
+        
+        [self showStatusMsgBtnWith:statusFrames.count];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //停止刷新
+        [refresh endRefreshing];
+    }];
+
+}
+
+/**
+ *  展示更新微博数据量
+ *
+ *  @param count 微博数据量
+ */
+- (void)showStatusMsgBtnWith:(NSInteger)count{
+    
+    UIButton *StatusCountBtn = [[UIButton alloc]init];
+    [StatusCountBtn setBackgroundImage:[UIImage resizingImageWithName:@"timeline_new_status_background"] forState:UIControlStateNormal];
+    
+    if (!count) {
+        [StatusCountBtn setAttributedTitle:[[NSAttributedString alloc]initWithString:@"没有新微博" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13],NSForegroundColorAttributeName:[UIColor orangeColor]}] forState:UIControlStateNormal];
+    }else{
+        [StatusCountBtn setAttributedTitle:[[NSAttributedString alloc]initWithString:[NSString stringWithFormat:@"更新了%ld条微博",count] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13],NSForegroundColorAttributeName:[UIColor orangeColor]}] forState:UIControlStateNormal];
+    }
+    //将按钮插到导航栏后面
+    [self.navigationController.view insertSubview:StatusCountBtn belowSubview:self.navigationController.navigationBar];
+    
+   
+    CGFloat btnH = 30;
+    CGFloat btnX = 2;
+    CGFloat btnW = self.view.frame.size.width-btnX*2;
+    CGFloat btnY = 34;
+    
+    StatusCountBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
+    
+    //动画展现微博数据量
+    [UIView animateWithDuration:1 delay:0.3 options:UIViewAnimationOptionCurveLinear animations:^{
+    
+        StatusCountBtn.transform = CGAffineTransformMakeTranslation(0, 30);
+   
+    } completion:^(BOOL finished) {
+      
+        [UIView animateKeyframesWithDuration:1 delay:0.5 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
+            StatusCountBtn.transform = CGAffineTransformMakeTranslation(0, -30);
+        } completion:nil];
+        
+    }];
+}
 
 - (void)setUPBarbuttonItem{
 
@@ -58,8 +151,8 @@
     
     self.tableView.backgroundColor =  [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, CZHTableViewCellBolder, 0);
-    
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, CZHTableViewCellBolder, 0);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)setUpTitleView{
@@ -89,37 +182,7 @@
 
 }
 
-/**
- *  更新微博数据
- */
-- (void)updateStatusData{
-    
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    NSMutableDictionary*param = [NSMutableDictionary dictionary];
-    param[@"access_token"] = [CZHAccountTool account].access_token;
-    
-    [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSArray *statusArray = [CZHStatuses objectArrayWithKeyValuesArray:responseObject[@"statuses"] ];
-        NSMutableArray *statusFrames = [NSMutableArray array];
-        for (CZHStatuses *status in statusArray) {
-            
-            CZHStatusFrame*statusesFrame = [[CZHStatusFrame alloc]init];
-            statusesFrame.statues = status;
-            
-            [statusFrames addObject:statusesFrame];
-        }
-        self.statusesFrame = statusFrames;
 
-        [self.tableView reloadData];
- 
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-        NSLog(@"%@",error);
-   
-    }];
-    
-}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
