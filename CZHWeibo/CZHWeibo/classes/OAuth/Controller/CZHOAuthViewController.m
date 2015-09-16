@@ -59,6 +59,9 @@
         NSString* code = [urlStr substringFromIndex:range.length+range.location];
         
         [self responseWithCode:code];
+
+        //不加载请求，可以不加载回调页面
+        return NO;
     }
     
     return YES;
@@ -73,12 +76,6 @@
 
     [MBProgressHUD hideHUD];
     [MBProgressHUD showSuccess:@"やとはいりました"];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-
-    [MBProgressHUD hideHUD];
-    [MBProgressHUD showError:@"失敗しました，あなたのネットは問題があります"];
 }
 
 - (void)responseWithCode:(NSString*)code{
@@ -101,11 +98,15 @@
         [CZHWeiboTool ChooseRootController];
         
         [MBProgressHUD hideHUD];
+        [MBProgressHUD showSuccess:@"やとはいりました"];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"失敗しました，あなたのネットは問題があります"];
     }];
 }
+
+
 
 @end

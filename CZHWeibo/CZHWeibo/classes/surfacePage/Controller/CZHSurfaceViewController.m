@@ -42,9 +42,15 @@
     CGRect frame = SurSV.frame;
 
     for (NSInteger i = 0; i < CZHSurfaceViewImageViewCount; i++) {
-        
-        UIImageView*imageView = [[UIImageView alloc]initWithImage:[UIImage resizingImageWithName:names[i]]];
-        
+        UIImageView*imageView = [[UIImageView alloc]init];
+        if(fourInch){
+            UIImage *newFeatureImage = [UIImage resizingImageWithName:[names[i] stringByAppendingString:@"-568h"]];
+            imageView.image =newFeatureImage;
+        }else{
+           UIImage *newFeatureImage = [UIImage resizingImageWithName:names[i]];
+            imageView.image =newFeatureImage;
+        }
+       
         frame.origin.x = frame.size.width*i;
         
         imageView.frame = frame;

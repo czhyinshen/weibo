@@ -18,13 +18,16 @@
 #import "CZHStatuses.h"
 #import "CZHStatusFrame.h"
 #import "CZHStatusesTableViewCell.h"
+#import "MJRefresh.h"
+#import "UIScrollView+MJRefresh.h"
+
 
 #define titleBtnImageDownTag 0
 #define titleBtnUpImageTag 1
 
 @interface CZHHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)NSMutableArray  *statusesFrame;
-
+@property (nonatomic,weak)CZHTitleBtn *titleBtn;
 @end
 
 @implementation CZHHomeViewController
@@ -43,31 +46,35 @@
     //刷新数据
     [self setUpRefreshController];
     
-    [self setUPBarbuttonItem];
-
     [self setUpTitleView];
     
+    [self setUPBarbuttonItem];
+
+    [self setUserName:self.titleBtn];
 }
 
 - (void)setUpRefreshController{
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
-    [refreshControl addTarget:self action:@selector(refreshData:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:refreshControl];
-    [refreshControl beginRefreshing];
-    if(refreshControl.refreshing){
-        refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"正在刷新" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10],NSForegroundColorAttributeName:[UIColor grayColor]}];
-    }
+    //下拉加载
+    [self.tableView addHeaderWithTarget:self action:@selector(refreshHeader:)];
+    self.tableView.headerRefreshingText = @"荫绅正在帮你刷新";
+    self.tableView.headerPullToRefreshText = @"下拉帮你刷新";
+    [self.tableView headerEndRefreshing];
     
-    [self refreshData:refreshControl];
+    //上拉加载
+    [self.tableView addFooterWithTarget:self action:@selector(refreshFooter:)];
+    [self.tableView footerBeginRefreshing];
+    self.tableView.footerRefreshingText = @"荫绅正在帮你加载";
+    self.tableView.footerPullToRefreshText = @"上拉帮你刷新";
 }
 
-- (void)refreshData:(UIRefreshControl*)refresh{
-    
+
+- (void)refreshHeader:(UITableView *)tableView{
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-   
+    
     NSMutableDictionary*param = [NSMutableDictionary dictionary];
     param[@"access_token"] = [CZHAccountTool account].access_token;
+    param[@"count"] = @10;
     if (self.statusesFrame.count) {
         CZHStatusFrame *statusFrame = self.statusesFrame[0];
         param[@"since_id"] = statusFrame.statues.idstr;
@@ -92,12 +99,50 @@
         
         [self.tableView reloadData];
         //停止刷新
-        [refresh endRefreshing];
+        [self.tableView headerEndRefreshing];
         
         [self showStatusMsgBtnWith:statusFrames.count];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //停止刷新
-        [refresh endRefreshing];
+        [self.tableView headerEndRefreshing];
+    }];
+}
+
+- (void)refreshFooter:(UITableView *)tableView{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSMutableDictionary*param = [NSMutableDictionary dictionary];
+    param[@"access_token"] = [CZHAccountTool account].access_token;
+    param[@"count"] = @10;
+    if (self.statusesFrame.count) {
+        CZHStatusFrame *statusFrame = [self.statusesFrame lastObject];
+        long long maxID = [statusFrame.statues.idstr longLongValue]-1;
+        param[@"since_id"] = @(maxID);
+    }
+    
+    [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSArray *statusArray = [CZHStatuses objectArrayWithKeyValuesArray:responseObject[@"statuses"] ];
+        NSMutableArray *statusFrames = [NSMutableArray array];
+        for (CZHStatuses *status in statusArray) {
+            
+            CZHStatusFrame*statusesFrame = [[CZHStatusFrame alloc]init];
+            statusesFrame.statues = status;
+            
+            [statusFrames addObject:statusesFrame];
+        }
+        //将新微博添加到微博数组尾
+
+        [self.statusesFrame addObjectsFromArray:statusFrames];
+        
+        [self.tableView reloadData];
+        //停止刷新
+        [self.tableView footerEndRefreshing];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //停止刷新
+        [self.tableView footerEndRefreshing];
     }];
 
 }
@@ -124,19 +169,19 @@
     CGFloat btnH = 30;
     CGFloat btnX = 2;
     CGFloat btnW = self.view.frame.size.width-btnX*2;
-    CGFloat btnY = 34;
+    CGFloat btnY = 64-btnH;
     
     StatusCountBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
     
     //动画展现微博数据量
     [UIView animateWithDuration:1 delay:0.3 options:UIViewAnimationOptionCurveLinear animations:^{
     
-        StatusCountBtn.transform = CGAffineTransformMakeTranslation(0, 30);
+        StatusCountBtn.transform = CGAffineTransformMakeTranslation(0, btnH);
    
     } completion:^(BOOL finished) {
       
         [UIView animateKeyframesWithDuration:1 delay:0.5 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
-            StatusCountBtn.transform = CGAffineTransformMakeTranslation(0, -30);
+            StatusCountBtn.transform = CGAffineTransformMakeTranslation(0, -btnH);
         } completion:nil];
         
     }];
@@ -155,34 +200,48 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
+/**
+ *  设置首页标题
+ */
 - (void)setUpTitleView{
     CZHTitleBtn *titleBtn = [CZHTitleBtn titleBtn];
     
-    titleBtn.frame = CGRectMake(0, 0, 100, 30);
+    if ([CZHAccountTool account].name) {
+        [titleBtn setTitle:[CZHAccountTool account].name forState:UIControlStateNormal];
+    }else{
+        [titleBtn setTitle:@"首页" forState:UIControlStateNormal];
+    }
+    [self setUserName:titleBtn];
     
-    [titleBtn setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
-    [titleBtn setTitle:@"dsdfas" forState:UIControlStateNormal];
-    
-    
-    titleBtn.tag = titleBtnImageDownTag;
-    [titleBtn setBackgroundImage:[UIImage resizingImageWithName:@"navigationbar_filter_background_highlighted"] forState:UIControlStateHighlighted];
-    
-    [titleBtn addTarget:self action:@selector(clickTitleBtn:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = titleBtn;
 }
 
-- (void)clickTitleBtn:(UIButton *)titleBtn{
-    if (titleBtn.tag == titleBtnImageDownTag) {
-        [titleBtn setImage:[UIImage imageWithName:@"navigationbar_arrow_up"] forState:UIControlStateNormal];
-        titleBtn.tag = titleBtnUpImageTag;
-    }else{
-        [titleBtn setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
-        titleBtn.tag = titleBtnImageDownTag;
-    }
+/**
+ *  获得用户昵称
+ *
+ *  @param btn 用户标题按钮
+ */
+- (void)setUserName:(CZHTitleBtn*)btn{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSMutableDictionary*param = [NSMutableDictionary dictionary];
+    param[@"access_token"] = [CZHAccountTool account].access_token;
+    param[@"uid"] = @([CZHAccountTool account].uid);
+    
+    [mgr GET:@"https://api.weibo.com/2/users/show.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       
+        CZHUser *user = [CZHUser objectWithKeyValues:responseObject];
+        [btn setTitle:user.name forState:UIControlStateNormal];
+        //保存昵称
+        CZHAccount*account = [CZHAccountTool account];
+        account.name = user.name;
+        [CZHAccountTool saveAccount:account];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
 
 }
-
-
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

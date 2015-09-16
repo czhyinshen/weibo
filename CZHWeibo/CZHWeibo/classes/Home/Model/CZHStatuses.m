@@ -27,6 +27,8 @@
 -(NSString *)created_at{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     dateFormatter.dateFormat = @"EEE MMM dd HH:mm:ss Z yyyy";
+   //声明美国日期
+    dateFormatter.locale = [[NSLocale alloc]initWithLocaleIdentifier:@"en_US"];
     NSDate *creatDate = [dateFormatter dateFromString:_created_at];
     
     if (creatDate.isToday) {

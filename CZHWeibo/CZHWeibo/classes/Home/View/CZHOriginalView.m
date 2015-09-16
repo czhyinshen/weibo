@@ -111,7 +111,7 @@
     self.iconView.backgroundColor = [UIColor clearColor];
     
     //微博vip
-    if (user.mbtype) {
+    if (user.mbtype>2 ) {
         self.VipView.hidden = NO;
         [self.VipView setImage:[UIImage imageWithName:[NSString stringWithFormat:@"common_icon_membership_level%d",user.mbrank]]];
         self.VipView.backgroundColor = [UIColor clearColor];
