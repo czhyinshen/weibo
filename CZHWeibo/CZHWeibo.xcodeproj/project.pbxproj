@@ -25,6 +25,8 @@
 		C42B55E71BA71D660020B353 /* CZHOriginalView.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55E61BA71D660020B353 /* CZHOriginalView.m */; };
 		C42B55F21BA73E6C0020B353 /* CZHPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B55F11BA73E6C0020B353 /* CZHPhoto.m */; };
 		C42EB6C71B9C2F9600E000F7 /* CZHTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = C42EB6C61B9C2F9600E000F7 /* CZHTitleBtn.m */; };
+		C42F7B421BAAEEEC0008C579 /* CZHComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42F7B401BAAEEEC0008C579 /* CZHComposeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		C42F7B461BAAEFF30008C579 /* CZHComposeTV.m in Sources */ = {isa = PBXBuildFile; fileRef = C42F7B451BAAEFF30008C579 /* CZHComposeTV.m */; settings = {ASSET_TAGS = (); }; };
 		C43072891BA93F58009EC6CE /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C43072791BA93F58009EC6CE /* MJRefresh.bundle */; };
 		C430728A1BA93F58009EC6CE /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = C430727C1BA93F58009EC6CE /* MJRefreshBaseView.m */; };
 		C430728B1BA93F58009EC6CE /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C430727E1BA93F58009EC6CE /* MJRefreshConst.m */; };
@@ -36,6 +38,7 @@
 		C430729A1BA95B03009EC6CE /* new_feature_1-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43072971BA95B03009EC6CE /* new_feature_1-568h@2x.png */; };
 		C430729B1BA95B03009EC6CE /* new_feature_2-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43072981BA95B03009EC6CE /* new_feature_2-568h@2x.png */; };
 		C430729C1BA95B03009EC6CE /* new_feature_3-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C43072991BA95B03009EC6CE /* new_feature_3-568h@2x.png */; };
+		C430729E1BA964F5009EC6CE /* CZHCommon.h in Sources */ = {isa = PBXBuildFile; fileRef = C430729D1BA964F5009EC6CE /* CZHCommon.h */; };
 		C43E7E5B1B8D649300766A51 /* CZHTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E7E5A1B8D649300766A51 /* CZHTabButton.m */; };
 		C44532131BA0005A005992D7 /* CZHOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44532121BA0005A005992D7 /* CZHOAuthViewController.m */; };
 		C44532291BA00624005992D7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C44532171BA00624005992D7 /* AFHTTPRequestOperation.m */; };
@@ -146,6 +149,10 @@
 		C42B55F11BA73E6C0020B353 /* CZHPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHPhoto.m; sourceTree = "<group>"; };
 		C42EB6C51B9C2F9600E000F7 /* CZHTitleBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZHTitleBtn.h; path = CZHWeibo/classes/Home/View/CZHTitleBtn.h; sourceTree = SOURCE_ROOT; };
 		C42EB6C61B9C2F9600E000F7 /* CZHTitleBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CZHTitleBtn.m; path = CZHWeibo/classes/Home/View/CZHTitleBtn.m; sourceTree = SOURCE_ROOT; };
+		C42F7B3F1BAAEEEC0008C579 /* CZHComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHComposeViewController.h; sourceTree = "<group>"; };
+		C42F7B401BAAEEEC0008C579 /* CZHComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHComposeViewController.m; sourceTree = "<group>"; };
+		C42F7B441BAAEFF30008C579 /* CZHComposeTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHComposeTV.h; sourceTree = "<group>"; };
+		C42F7B451BAAEFF30008C579 /* CZHComposeTV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHComposeTV.m; sourceTree = "<group>"; };
 		C43072791BA93F58009EC6CE /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		C430727A1BA93F58009EC6CE /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		C430727B1BA93F58009EC6CE /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -165,6 +172,7 @@
 		C43072971BA95B03009EC6CE /* new_feature_1-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_feature_1-568h@2x.png"; sourceTree = "<group>"; };
 		C43072981BA95B03009EC6CE /* new_feature_2-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_feature_2-568h@2x.png"; sourceTree = "<group>"; };
 		C43072991BA95B03009EC6CE /* new_feature_3-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_feature_3-568h@2x.png"; sourceTree = "<group>"; };
+		C430729D1BA964F5009EC6CE /* CZHCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZHCommon.h; path = ../CZHCommon.h; sourceTree = "<group>"; };
 		C43E7E591B8D649300766A51 /* CZHTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHTabButton.h; sourceTree = "<group>"; };
 		C43E7E5A1B8D649300766A51 /* CZHTabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHTabButton.m; sourceTree = "<group>"; };
 		C44532111BA0005A005992D7 /* CZHOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHOAuthViewController.h; sourceTree = "<group>"; };
@@ -386,6 +394,33 @@
 			path = MJPhotoBrowser;
 			sourceTree = "<group>";
 		};
+		C42F7B3B1BAAEEEC0008C579 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				C42F7B431BAAEFCF0008C579 /* view */,
+				C42F7B3C1BAAEEEC0008C579 /* Comtroller */,
+			);
+			path = Compose;
+			sourceTree = "<group>";
+		};
+		C42F7B3C1BAAEEEC0008C579 /* Comtroller */ = {
+			isa = PBXGroup;
+			children = (
+				C42F7B3F1BAAEEEC0008C579 /* CZHComposeViewController.h */,
+				C42F7B401BAAEEEC0008C579 /* CZHComposeViewController.m */,
+			);
+			path = Comtroller;
+			sourceTree = "<group>";
+		};
+		C42F7B431BAAEFCF0008C579 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C42F7B441BAAEFF30008C579 /* CZHComposeTV.h */,
+				C42F7B451BAAEFF30008C579 /* CZHComposeTV.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		C43072781BA93F58009EC6CE /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +546,7 @@
 		C4574DB01B8CBEB90036748B /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				C42F7B3B1BAAEEEC0008C579 /* Compose */,
 				C4574DD71B8CC53A0036748B /* other */,
 				C445320D1BA0000F005992D7 /* OAuth */,
 				C4574DBD1B8CBEBA0036748B /* Main */,
@@ -799,6 +835,7 @@
 		C474F2031B95C99F003C8C25 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				C430729D1BA964F5009EC6CE /* CZHCommon.h */,
 				C47D4FB61BA659770045FA2C /* NSDate+CZH.h */,
 				C47D4FB71BA659770045FA2C /* NSDate+CZH.m */,
 				C474F20A1B95CCED003C8C25 /* UIImage+CZHCustomImg.h */,
@@ -973,6 +1010,7 @@
 				C445322E1BA00624005992D7 /* AFURLConnectionOperation.m in Sources */,
 				C457E6951BA15A170006C3AE /* SDWebImageDownloader.m in Sources */,
 				C445322D1BA00624005992D7 /* AFSecurityPolicy.m in Sources */,
+				C42F7B421BAAEEEC0008C579 /* CZHComposeViewController.m in Sources */,
 				C457E69C1BA15A170006C3AE /* UIImage+WebP.m in Sources */,
 				C4079FC41BA7D4EE000EFA84 /* CZHPhotosView.m in Sources */,
 				C430728D1BA93F58009EC6CE /* MJRefreshHeaderView.m in Sources */,
@@ -1001,9 +1039,11 @@
 				C44532291BA00624005992D7 /* AFHTTPRequestOperation.m in Sources */,
 				C44532311BA00624005992D7 /* AFURLSessionManager.m in Sources */,
 				C446E74C1BA2D8BD00ACAF54 /* CZHStatusesTableViewCell.m in Sources */,
+				C42F7B461BAAEFF30008C579 /* CZHComposeTV.m in Sources */,
 				C430728A1BA93F58009EC6CE /* MJRefreshBaseView.m in Sources */,
 				C44532421BA064EF005992D7 /* MBProgressHUD+MJ.m in Sources */,
 				C474F2121B95E7E0003C8C25 /* UIBarButtonItem+CZH.m in Sources */,
+				C430729E1BA964F5009EC6CE /* CZHCommon.h in Sources */,
 				C457E6961BA15A170006C3AE /* SDWebImageDownloaderOperation.m in Sources */,
 				C445322C1BA00624005992D7 /* AFNetworkReachabilityManager.m in Sources */,
 				C457E6BB1BA16ACF0006C3AE /* MJMethod.m in Sources */,
@@ -1141,7 +1181,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = CZHWeibo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1157,7 +1197,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = CZHWeibo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

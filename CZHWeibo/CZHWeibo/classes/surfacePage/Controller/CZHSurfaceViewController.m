@@ -12,7 +12,7 @@
 #import "CZHTabBarController.h"
 #import "CZHCheckBox.h"
 #import "UIImage+CZHCustomImg.h"
-#define CZHSurfaceViewImageViewCount 3
+
 
 @interface CZHSurfaceViewController ()<UIScrollViewDelegate>
 @property (nonatomic,strong)UIPageControl *pageControl;

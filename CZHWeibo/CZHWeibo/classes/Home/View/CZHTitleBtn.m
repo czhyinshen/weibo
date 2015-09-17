@@ -8,10 +8,6 @@
 
 #import "CZHTitleBtn.h"
 
-#define CZHTitleBtnimageWidth 30
-#define titleBtnImageDownTag 0
-#define titleBtnUpImageTag 1
-
 @interface CZHTitleBtn()
 {
     NSUInteger titleSizeW;

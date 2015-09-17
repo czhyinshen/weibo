@@ -13,10 +13,6 @@
 #import "MJPhoto.h"
 #import "CZHPhoto.h"
 
-#define CZHPhotoW 90
-#define CZHPhotoH 90
-#define CZHPhotoMargin 10
-
 @implementation CZHPhotosView
 
 -(instancetype)initWithFrame:(CGRect)frame{

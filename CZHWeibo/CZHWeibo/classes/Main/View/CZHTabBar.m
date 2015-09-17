@@ -49,13 +49,18 @@
         [btn setImage:[UIImage imageWithName:@"tabbar_compose_icon_add"] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageWithName:@"tabbar_compose_icon_add_highlighted"] forState:UIControlStateHighlighted];
         btn.bounds = CGRectMake(0, 0, btn.currentBackgroundImage.size.width, btn.currentBackgroundImage.size.height);
-        
+        [btn addTarget:self action:@selector(clickAddBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
         self.addBtn = btn;
-       
     
     }
     return self;
+}
+
+- (void)clickAddBtn:(UIButton*)addBtn{
+    if ([self respondsToSelector:@selector(clickAddBtn:)]) {
+        [self.delegate TabBarDiselectButtonItem:self];
+    }
 }
 
 - (void)addTabBarButtonWithItem:(UITabBarItem*)item{

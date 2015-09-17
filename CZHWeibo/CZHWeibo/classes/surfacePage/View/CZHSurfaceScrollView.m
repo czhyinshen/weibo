@@ -8,8 +8,6 @@
 
 #import "CZHSurfaceScrollView.h"
 #import "CZHCheckBox.h"
-#define CZHSurfaceBtnShareTrueTag 1;
-#define CZHSurfaceBtnShareFalseTag 0;
 
 @interface CZHSurfaceScrollView()
 

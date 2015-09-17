@@ -10,6 +10,8 @@
 #import "UIImage+CZHCustomImg.h"
 #import "CZHNavigationController.h"
 #import "CZHSurfaceViewController.h"
+#import "CZHComposeViewController.h"
+
 @interface CZHTabBarController ()<CZHTabBarDelegate>
 
 @property (nonatomic,weak)CZHTabBar *customTabBar;
@@ -87,6 +89,17 @@
 - (void)TabBar:(CZHTabBar *)tabBar diselectButtonItemFrom:(NSInteger)itemIndex to:(NSInteger)newItemIndex{
     self.selectedIndex = newItemIndex;
 }
+
+- (void)TabBarDiselectButtonItem:(CZHTabBar *)tabBar{
+   
+    CZHComposeViewController *composeVC = [[CZHComposeViewController alloc]init];
+    CZHNavigationController *cmpNavi = [[CZHNavigationController alloc]initWithRootViewController:composeVC];
+
+    
+    [self presentViewController:cmpNavi animated:YES completion:nil];
+    
+}
+
 /*
 #pragma mark - Navigation
 

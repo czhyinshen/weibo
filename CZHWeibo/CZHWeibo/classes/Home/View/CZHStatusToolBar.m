@@ -8,6 +8,7 @@
 
 #import "CZHStatusToolBar.h"
 #import "CZHStatuses.h"
+
 @interface CZHStatusToolBar()
 
 @property (nonatomic,strong)NSMutableArray *dividers;

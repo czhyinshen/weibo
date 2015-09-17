@@ -27,7 +27,7 @@
     UIWebView*webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
     webView.delegate = self;
     [self.view addSubview:webView];
-    NSURL *url = [NSURL URLWithString:@"https://api.weibo.com/oauth2/authorize?client_id=445140798&response_type=code&redirect_uri=https://api.weibo.com/oauth2/default.html"];
+    NSURL *url = [NSURL URLWithString:CZHRequstURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     [webView loadRequest:request];
@@ -51,6 +51,7 @@
  */
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
 
+    //微博请求
     NSString *urlStr = [request.URL absoluteString];
     NSRange range = [urlStr rangeOfString:@"code="];
  
@@ -67,6 +68,8 @@
     return YES;
 }
 
+
+
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     
     [MBProgressHUD showMessage:@"お兄ちゃんは頑張るぞう..."];
@@ -82,10 +85,10 @@
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"client_id"] = @"445140798";
-    param[@"client_secret"] = @"70687feab465788df3ccb839648d6117";
+    param[@"client_id"] = CZHAppKey;
+    param[@"client_secret"] = CZHAppSecret;
     param[@"grant_type"] = @"authorization_code";
-    param[@"redirect_uri"] = @"https://api.weibo.com/oauth2/default.html";
+    param[@"redirect_uri"] = CZHRedirectURI;
     param[@"code"] = code;
     
     [mgr POST:@"https://api.weibo.com/oauth2/access_token" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -107,6 +110,17 @@
     }];
 }
 
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
 
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+        //if ([trustedHosts containsObject:challenge.protectionSpace.host])
+        [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]
+             forAuthenticationChallenge:challenge];
+    
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
 
 @end

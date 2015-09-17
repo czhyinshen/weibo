@@ -13,7 +13,7 @@
 @optional
 
 - (void)TabBar:(CZHTabBar*)tabBar diselectButtonItemFrom:(NSInteger)itemIndex to:(NSInteger)newItemIndex;
-
+- (void)TabBarDiselectButtonItem:(CZHTabBar*)tabBar;
 @end
 
 @interface CZHTabBar : UIView

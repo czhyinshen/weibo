@@ -22,9 +22,6 @@
 #import "UIScrollView+MJRefresh.h"
 
 
-#define titleBtnImageDownTag 0
-#define titleBtnUpImageTag 1
-
 @interface CZHHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)NSMutableArray  *statusesFrame;
 @property (nonatomic,weak)CZHTitleBtn *titleBtn;
@@ -59,13 +56,15 @@
     [self.tableView addHeaderWithTarget:self action:@selector(refreshHeader:)];
     self.tableView.headerRefreshingText = @"荫绅正在帮你刷新";
     self.tableView.headerPullToRefreshText = @"下拉帮你刷新";
-    [self.tableView headerEndRefreshing];
+    [self.tableView headerBeginRefreshing];
     
     //上拉加载
     [self.tableView addFooterWithTarget:self action:@selector(refreshFooter:)];
     [self.tableView footerBeginRefreshing];
     self.tableView.footerRefreshingText = @"荫绅正在帮你加载";
     self.tableView.footerPullToRefreshText = @"上拉帮你刷新";
+    
+    
 }
 
 
@@ -118,7 +117,7 @@
     if (self.statusesFrame.count) {
         CZHStatusFrame *statusFrame = [self.statusesFrame lastObject];
         long long maxID = [statusFrame.statues.idstr longLongValue]-1;
-        param[@"since_id"] = @(maxID);
+        param[@"max_id"] = @(maxID);
     }
     
     [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
