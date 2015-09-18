@@ -30,6 +30,8 @@
     
     [super pushViewController:viewController  animated:animated];
 }
+
+
 /**
  *  设置导航栏按钮主题
  */
@@ -43,16 +45,15 @@
         [item setBackgroundImage:[UIImage imageWithName:@"navigationbar_button_background_pushed"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
         [item setBackgroundImage:[UIImage imageWithName:@"navigationbar_button_background_disable"] forState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
     }
+    
     // 设置文字属性
     NSDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs = @{NSFontAttributeName :[UIFont systemFontOfSize: iOS7?15:12],NSForegroundColorAttributeName:CZHTabButtonImageSelectedColor};
+    textAttrs = @{NSFontAttributeName :[UIFont systemFontOfSize: 15],NSForegroundColorAttributeName:CZHTabButtonImageSelectedColor};
     
     [item setTitleTextAttributes:textAttrs forState:UIControlStateHighlighted];
+    
     [item setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
-    
-    NSDictionary *disableTextAttrs = @{NSForegroundColorAttributeName:[UIColor lightGrayColor]};
-    
-    [item setTitleTextAttributes:disableTextAttrs forState:UIControlStateDisabled];
+
 }
 
 /**
