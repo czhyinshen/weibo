@@ -72,4 +72,5 @@
 //7.是否是iOS7
 #define iOS7 [[UIDevice currentDevice].systemVersion doubleValue] >= 7.0
 
-
+//8.发微博工具栏
+#define CZHComposeToolbarH 44

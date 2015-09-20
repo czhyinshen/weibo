@@ -68,8 +68,6 @@
     return YES;
 }
 
-
-
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     
     [MBProgressHUD showMessage:@"お兄ちゃんは頑張るぞう..."];
@@ -81,6 +79,18 @@
     [MBProgressHUD showSuccess:@"やとはいりました"];
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    NSLog(@"%@",error);
+    NSURL *url = [NSURL URLWithString:[error.userInfo objectForKey:@"NSErrorFailingURLStringKey"]];
+    if ([error.domain isEqual:@"WebKitErrorDomain"]
+        && error.code == 101
+        && [[UIApplication sharedApplication]canOpenURL:url])
+    {
+        [[UIApplication sharedApplication]openURL:url];
+        return;
+    }
+
+}
 - (void)responseWithCode:(NSString*)code{
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -104,7 +114,7 @@
         [MBProgressHUD showSuccess:@"やとはいりました"];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        NSLog(@"%@",error);
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:@"失敗しました，あなたのネットは問題があります"];
     }];

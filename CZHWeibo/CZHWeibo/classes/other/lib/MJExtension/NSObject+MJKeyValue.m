@@ -20,7 +20,7 @@
 + (instancetype)objectWithKeyValues:(NSDictionary *)keyValues
 {
     if (![keyValues isKindOfClass:[NSDictionary class]]) {
-        [NSException raise:@"keyValues is not a NSDictionary" format:nil];
+        [NSException raise:@"keyValues is not a NSDictionary" format:Nil];
     }
     
     id model = [[self alloc] init];
